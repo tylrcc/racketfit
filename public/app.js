@@ -133,12 +133,22 @@
     </svg>`;
   }
 
-  // Use a real product photo when an `image` URL is present, otherwise the
-  // vector render. A broken photo hides itself (the card keeps its layout).
+  // Real product photo when an `image` URL is present, else the vector render.
+  // A broken photo swaps back to the render via the data-fallback handler.
   function mediaFor(item, kind) {
-    if (item.image) return `<img class="real-photo" src="${item.image}" alt="${item.brand} ${item.model}" loading="lazy" onerror="this.remove()">`;
+    if (item.image) {
+      return `<img class="real-photo" src="${item.image}" alt="${item.brand} ${item.model}" loading="lazy" ` +
+        `onerror="this.replaceWith(window.__rfArt('${item.id}','${kind}'))">`;
+    }
     return kind === "racket" ? racketSVG(item) : stringSVG(item);
   }
+  // Lookup used by the photo onerror fallback to swap in the vector render.
+  window.__rfArt = (id, kind) => {
+    const item = (DATA && (kind === "racket" ? DATA.rackets : DATA.strings) || []).find((x) => x.id === id);
+    const span = document.createElement("span");
+    span.innerHTML = item ? (kind === "racket" ? racketSVG(item) : stringSVG(item)) : "";
+    return span.firstChild || span;
+  };
 
   // --- home: map grid ---------------------------------------------------
   const MAP = [

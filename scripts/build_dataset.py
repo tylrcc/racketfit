@@ -308,7 +308,15 @@ def slug(brand: str, model: str) -> str:
     return s
 
 
+def _load_images() -> dict:
+    p = ROOT / "scripts" / "racket_images.json"
+    if p.exists():
+        return json.loads(p.read_text(encoding="utf-8"))
+    return {}
+
+
 def build_rackets() -> list[dict]:
+    images = _load_images()
     out = []
     seen = set()
     for (brand, model, year, head, wt, bal, sw, ra, beam, pat, cat, msrp) in R:
@@ -316,13 +324,16 @@ def build_rackets() -> list[dict]:
         if rid in seen:
             raise SystemExit(f"duplicate id: {rid}")
         seen.add(rid)
-        out.append({
+        entry = {
             "id": rid, "brand": brand, "model": model, "year": year,
             "head_size_sqin": head, "length_in": 27.0, "strung_weight_g": wt,
             "balance_pts_hl": bal, "swingweight": sw, "stiffness_ra": ra,
             "beam_mm": beam, "string_pattern": pat, "category": cat,
             "msrp_usd": msrp, "url": URLS.get(brand),
-        })
+        }
+        if rid in images:
+            entry["image"] = images[rid]
+        out.append(entry)
     out.sort(key=lambda r: (r["brand"], -r["year"], r["model"]))
     return out
 
