@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RacketFit — Find your perfect tennis racket specs</title>
+  <meta name="description" content="Take a 60-second survey and get a personalized tennis racket spec profile plus ranked racket matches." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="ball">🎾</span>
+      <span class="brand-name">Racket<strong>Fit</strong></span>
+    </div>
+    <a class="ghost-link" href="#" id="restartLink" hidden>Start over</a>
+  </header>
+
+  <main class="container">
+
+    <!-- INTRO -->
+    <section id="intro" class="panel intro">
+      <p class="eyebrow">Find your specs in 60 seconds</p>
+      <h1>The right racket is a spec sheet, not a brand.</h1>
+      <p class="lede">
+        Answer a few questions about your game. We translate your answers into a
+        target spec profile (head size, weight, balance, stiffness, string pattern)
+        and rank real rackets by how closely they match.
+      </p>
+      <button class="btn btn-primary btn-lg" id="startBtn">Take the survey →</button>
+      <ul class="trust">
+        <li><strong>30</strong> rackets</li>
+        <li><strong>6</strong> brands</li>
+        <li><strong>0</strong> sign-ups</li>
+      </ul>
+    </section>
+
+    <!-- SURVEY -->
+    <section id="survey" class="panel" hidden>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">Question 1</span>
+      </div>
+      <div id="questionMount"></div>
+      <div class="survey-nav">
+        <button class="btn btn-ghost" id="backBtn">← Back</button>
+        <button class="btn btn-primary" id="nextBtn" disabled>Next →</button>
+      </div>
+    </section>
+
+    <!-- LOADING -->
+    <section id="loading" class="panel center" hidden>
+      <div class="spinner"></div>
+      <p>Matching your game to the racket database…</p>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="panel results" hidden>
+      <div class="results-head">
+        <p class="eyebrow">Your results</p>
+        <h2>Here is what fits your game</h2>
+      </div>
+
+      <div class="ideal-card" id="idealCard"></div>
+
+      <h3 class="section-title">Your top matches</h3>
+      <div id="matchList" class="match-list"></div>
+
+      <div class="results-actions">
+        <button class="btn btn-ghost" id="redoBtn">Retake survey</button>
+        <button class="btn btn-secondary" id="browseBtn">Browse all rackets</button>
+      </div>
+
+      <p class="disclaimer" id="disclaimer"></p>
+    </section>
+
+    <!-- BROWSE -->
+    <section id="browse" class="panel" hidden>
+      <div class="results-head">
+        <p class="eyebrow">The database</p>
+        <h2>All rackets</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="racket-table" id="racketTable">
+          <thead>
+            <tr>
+              <th>Racket</th><th>Head</th><th>Weight</th><th>Balance</th>
+              <th>SW</th><th>RA</th><th>Pattern</th><th>Category</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="results-actions">
+        <button class="btn btn-ghost" id="browseBackBtn">← Back to results</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>RacketFit is open source. Specs are approximate manufacturer values, always demo before you buy.</p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
