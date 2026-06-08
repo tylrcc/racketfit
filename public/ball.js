@@ -81,8 +81,8 @@
       ));
     }
     const seamCurve = new THREE.CatmullRomCurve3(seamPts, true);
-    const seamGeo = new THREE.TubeGeometry(seamCurve, 400, 0.052, 12, true);
-    const seamMat = new THREE.MeshStandardMaterial({ color: 0xfbfbf2, roughness: 0.8 });
+    const seamGeo = new THREE.TubeGeometry(seamCurve, 420, 0.07, 14, true);
+    const seamMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.65 });
     ball.add(new THREE.Mesh(seamGeo, seamMat));
 
     ball.rotation.set(0.5, 0.2, 0.15);
