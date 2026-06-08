@@ -435,28 +435,23 @@ body { background: var(--paper); }
    segmented toggle, results media (votely-matched skin)
    ============================================================ */
 
-/* ---------- spinning 3D logo cube (votely signature shape) ---------- */
-.nav-brand, .footer-brand { perspective: 500px; }
-.logo-cube {
-  width: 26px; height: 26px; position: relative; transform-style: preserve-3d;
-  transform: rotateX(-20deg) rotateY(0deg); animation: cube-spin 7s linear infinite;
+/* ---------- spinning tennis-ball logo (top-left + footer) ---------- */
+.logo-ball {
+  width: 24px; height: 24px; border-radius: 50%; position: relative; display: inline-block;
+  flex: 0 0 auto; overflow: hidden;
+  background: radial-gradient(circle at 35% 28%, #f2ff7a 0%, #ddf24a 45%, #b9d233 75%, #97b328 100%);
+  box-shadow: inset -3px -4px 7px rgba(0, 0, 0, .28), inset 3px 3px 6px rgba(255, 255, 255, .55);
+  animation: ball-roll 3.6s linear infinite;
 }
-.nav-brand:hover .logo-cube { animation-duration: 2.4s; }
-.lc-face {
-  position: absolute; width: 26px; height: 26px; border-radius: 5px;
-  background: linear-gradient(135deg, #93a8d1, #3b5998);
-  border: 1px solid rgba(255, 255, 255, .25);
-  box-shadow: inset 0 0 9px rgba(255, 255, 255, .20);
+.logo-ball::before, .logo-ball::after {
+  content: ""; position: absolute; inset: 8%; border-radius: 50%; border: 2px solid #fbfbf2;
 }
-.lc-front  { transform: translateZ(13px); }
-.lc-back   { transform: rotateY(180deg) translateZ(13px); }
-.lc-right  { transform: rotateY(90deg) translateZ(13px); background: linear-gradient(135deg, #6781b5, #2a4173); }
-.lc-left   { transform: rotateY(-90deg) translateZ(13px); background: linear-gradient(135deg, #6781b5, #2a4173); }
-.lc-top    { transform: rotateX(90deg) translateZ(13px); background: linear-gradient(135deg, #c5d2e8, #93a8d1); }
-.lc-bottom { transform: rotateX(-90deg) translateZ(13px); background: linear-gradient(135deg, #2a4173, #0f172a); }
-@keyframes cube-spin { from { transform: rotateX(-20deg) rotateY(0); } to { transform: rotateX(-20deg) rotateY(360deg); } }
-.footer-brand .logo-cube { width: 28px; height: 28px; }
-@media (prefers-reduced-motion: reduce) { .logo-cube { animation: none; } }
+.logo-ball::before { clip-path: inset(0 0 50% 0); transform: rotate(18deg) scaleX(1.4); }
+.logo-ball::after  { clip-path: inset(50% 0 0 0); transform: rotate(18deg) scaleX(1.4); }
+.nav-brand:hover .logo-ball { animation-duration: 1.3s; }
+.footer-brand .logo-ball { width: 28px; height: 28px; }
+@keyframes ball-roll { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .logo-ball { animation: none; } }
 
 /* ---------- language picker ---------- */
 .lang-wrap { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; }

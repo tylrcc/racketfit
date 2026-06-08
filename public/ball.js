@@ -1,8 +1,9 @@
-/* Interactive, photoreal-ish 3D tennis ball for the hero. Uses Three.js if
-   available and WebGL works; otherwise the CSS fallback ball stays visible.
-   Realism comes from: a fine multi-tone felt color map, a fibrous bump map,
-   a translucent "fuzz" halo shell that frizzes the silhouette, and a slightly
-   recessed white seam. */
+/* Interactive 3D tennis ball for the hero. Uses Three.js when WebGL is
+   available, otherwise the CSS fallback ball stays visible.
+   Realism: smooth optic-yellow felt color map, a subtle fibrous bump map for
+   the nap, a crisp curved white seam, and a soft "fuzz" halo rendered on the
+   BACK side of a slightly larger sphere so it frizzes the silhouette only,
+   never clouding the face of the ball. */
 (function () {
   "use strict";
 
@@ -27,20 +28,17 @@
     if (fallback) fallback.style.display = "none";
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-    camera.position.set(0, 0, 6.2);
+    const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    camera.position.set(0, 0, 6.0);
 
-    // ---- lights ----
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-    const key = new THREE.DirectionalLight(0xffffff, 1.2);
-    key.position.set(4, 5, 6);
+    // ---- lights: bright key + soft fill + warm bounce ----
+    scene.add(new THREE.AmbientLight(0xffffff, 0.62));
+    const key = new THREE.DirectionalLight(0xffffff, 1.05);
+    key.position.set(3.5, 5, 5);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0xeaf2ff, 0.45);
-    fill.position.set(-4, 1, 4);
+    const fill = new THREE.DirectionalLight(0xeef4ff, 0.4);
+    fill.position.set(-4, 0.5, 3);
     scene.add(fill);
-    const rim = new THREE.DirectionalLight(0xe9ff7a, 0.55);
-    rim.position.set(-5, -3, -5);
-    scene.add(rim);
 
     function makeCanvas(w, h) {
       const c = document.createElement("canvas");
@@ -48,59 +46,50 @@
       return { c, x: c.getContext("2d") };
     }
 
-    // ---- felt COLOR map: optic-yellow base + dense fine fibre speckle ----
+    // ---- felt COLOR map: smooth optic yellow + gentle fine speckle ----
     function feltColorTexture() {
       const { c, x } = makeCanvas(1024, 512);
       const g = x.createLinearGradient(0, 0, 0, 512);
-      g.addColorStop(0, "#eaff63");
-      g.addColorStop(0.5, "#d9ef3e");
-      g.addColorStop(1, "#c3dc2c");
+      g.addColorStop(0, "#e7fb5e");
+      g.addColorStop(0.5, "#d8ef42");
+      g.addColorStop(1, "#cbe636");
       x.fillStyle = g; x.fillRect(0, 0, 1024, 512);
-      // fine fibres: short strokes in mixed tones for a matte felt look
-      for (let i = 0; i < 60000; i++) {
+      // subtle fibre speckle (low contrast so it reads as felt, not noise)
+      for (let i = 0; i < 16000; i++) {
         const px = Math.random() * 1024, py = Math.random() * 512;
         const r = Math.random();
-        if (r < 0.4) x.strokeStyle = "rgba(255,255,255,0.10)";
-        else if (r < 0.7) x.strokeStyle = "rgba(150,170,40,0.16)";
-        else x.strokeStyle = "rgba(95,110,20,0.14)";
-        x.lineWidth = 0.8;
-        const ang = Math.random() * Math.PI;
-        const len = 1.5 + Math.random() * 2.5;
-        x.beginPath();
-        x.moveTo(px, py);
-        x.lineTo(px + Math.cos(ang) * len, py + Math.sin(ang) * len);
-        x.stroke();
+        x.fillStyle = r < 0.6 ? "rgba(255,255,255,0.05)" : "rgba(120,140,30,0.07)";
+        x.fillRect(px, py, 1.3, 1.3);
       }
       const t = new THREE.CanvasTexture(c);
       t.anisotropy = 8;
       return t;
     }
 
-    // ---- felt BUMP map: grayscale fibrous noise so light catches the nap ----
+    // ---- felt BUMP map: fine grayscale nap so light catches the fuzz ----
     function feltBumpTexture() {
       const { c, x } = makeCanvas(512, 256);
       x.fillStyle = "#808080"; x.fillRect(0, 0, 512, 256);
-      for (let i = 0; i < 45000; i++) {
+      for (let i = 0; i < 30000; i++) {
         const px = Math.random() * 512, py = Math.random() * 256;
-        const v = Math.random() > 0.5 ? 255 : 0;
-        x.fillStyle = `rgba(${v},${v},${v},0.20)`;
-        x.fillRect(px, py, 1, 1.6);
+        const v = Math.random() > 0.5 ? 235 : 30;
+        x.fillStyle = `rgba(${v},${v},${v},0.18)`;
+        x.fillRect(px, py, 1, 1.4);
       }
       const t = new THREE.CanvasTexture(c);
       t.wrapS = t.wrapT = THREE.RepeatWrapping;
-      t.repeat.set(3, 2);
+      t.repeat.set(4, 2);
       return t;
     }
 
-    // ---- fuzz ALPHA map: scattered fine hairs, mostly transparent ----
+    // ---- fuzz ALPHA map: scattered fine hairs (mostly transparent) ----
     function fuzzAlphaTexture() {
       const { c, x } = makeCanvas(1024, 512);
-      x.fillStyle = "#000"; x.fillRect(0, 0, 1024, 512); // transparent base
-      for (let i = 0; i < 26000; i++) {
+      x.fillStyle = "#000"; x.fillRect(0, 0, 1024, 512);
+      for (let i = 0; i < 22000; i++) {
         const px = Math.random() * 1024, py = Math.random() * 512;
-        const a = 0.25 + Math.random() * 0.5;
-        x.strokeStyle = `rgba(255,255,255,${a})`;
-        x.lineWidth = 0.7 + Math.random() * 0.6;
+        x.strokeStyle = `rgba(255,255,255,${0.4 + Math.random() * 0.5})`;
+        x.lineWidth = 0.8;
         const ang = Math.random() * Math.PI * 2;
         const len = 2 + Math.random() * 4;
         x.beginPath();
@@ -112,34 +101,34 @@
     }
 
     const ball = new THREE.Group();
-    const R0 = 1.55;
+    const R0 = 1.6;
 
     // core felt sphere
     const geo = new THREE.SphereGeometry(R0, 128, 128);
     const mat = new THREE.MeshStandardMaterial({
       map: feltColorTexture(),
       bumpMap: feltBumpTexture(),
-      bumpScale: 0.035,
-      roughness: 1.0,
+      bumpScale: 0.022,
+      roughness: 0.95,
       metalness: 0.0,
     });
     ball.add(new THREE.Mesh(geo, mat));
 
-    // fuzz halo: a slightly larger shell that frizzes the silhouette
-    const fuzzGeo = new THREE.SphereGeometry(R0 * 1.045, 96, 96);
-    const fuzzMat = new THREE.MeshStandardMaterial({
-      color: 0xe9ff63,
+    // fuzz halo: BACK side of a slightly larger sphere -> only the silhouette
+    // ring shows, giving a soft furry edge without covering the face.
+    const fuzzGeo = new THREE.SphereGeometry(R0 * 1.055, 96, 96);
+    const fuzzMat = new THREE.MeshBasicMaterial({
+      color: 0xe9ff6a,
       alphaMap: fuzzAlphaTexture(),
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.85,
       depthWrite: false,
-      roughness: 1.0,
-      side: THREE.DoubleSide,
+      side: THREE.BackSide,
     });
     ball.add(new THREE.Mesh(fuzzGeo, fuzzMat));
 
-    // ---- seam: white curve weaving around the sphere, slightly recessed ----
-    const R = R0 * 1.012;
+    // ---- seam: crisp white curve weaving around the sphere ----
+    const R = R0 * 1.005;
     const seamPts = [];
     const SEG = 400;
     for (let i = 0; i <= SEG; i++) {
@@ -153,15 +142,15 @@
       ));
     }
     const seamCurve = new THREE.CatmullRomCurve3(seamPts, true);
-    // faint darker groove under the seam for depth
-    const grooveGeo = new THREE.TubeGeometry(seamCurve, 440, 0.10, 16, true);
-    const grooveMat = new THREE.MeshStandardMaterial({ color: 0xb6c637, roughness: 1.0 });
+    // faint recessed groove under the seam for depth
+    const grooveGeo = new THREE.TubeGeometry(seamCurve, 440, 0.085, 16, true);
+    const grooveMat = new THREE.MeshStandardMaterial({ color: 0xaebf35, roughness: 1.0 });
     ball.add(new THREE.Mesh(grooveGeo, grooveMat));
-    const seamGeo = new THREE.TubeGeometry(seamCurve, 440, 0.062, 16, true);
-    const seamMat = new THREE.MeshStandardMaterial({ color: 0xf7f7ef, roughness: 0.7 });
+    const seamGeo = new THREE.TubeGeometry(seamCurve, 440, 0.05, 16, true);
+    const seamMat = new THREE.MeshStandardMaterial({ color: 0xf8f8f0, roughness: 0.6 });
     ball.add(new THREE.Mesh(seamGeo, seamMat));
 
-    ball.rotation.set(0.5, 0.2, 0.15);
+    ball.rotation.set(0.5, 0.2, 0.12);
     scene.add(ball);
 
     // ---- interaction: drag to spin, auto-spin otherwise ----
