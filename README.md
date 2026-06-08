@@ -9,8 +9,16 @@ RacketFit tells you everything you need in one place:
 - the **tension** to string it at, and
 - your **grip size**.
 
-RacketFit has **zero runtime dependencies**, it runs on the Python standard
-library alone. There is nothing to `pip install` for users, just run it.
+**▶ Live: https://racketfit.vercel.app** — take the quiz now, nothing to install.
+
+RacketFit ships two ways that share the same data and logic:
+
+- a **static web app** (`public/`) that runs entirely in the browser (deployed to
+  Vercel, no server); and
+- a **zero-dependency Python package** (`racketfit/`) for the CLI and library,
+  running on the standard library alone.
+
+The browser engine is a verified byte-for-byte port of the Python engine.
 
 ---
 
@@ -42,6 +50,24 @@ Optionally install it as a command:
 pip install -e .
 racketfit            # interactive survey
 racketfit --web      # launch the web app
+```
+
+## Deploy your own (Vercel)
+
+The site in `public/` is fully static, so deployment is just publishing a folder:
+
+```bash
+npm i -g vercel      # if you don't have it
+vercel deploy --prod --yes
+```
+
+`vercel.json` already configures a no-build static deploy (`outputDirectory: public`).
+It also works on GitHub Pages or Netlify, point them at `public/`.
+
+To regenerate the racket database after editing `scripts/build_dataset.py`:
+
+```bash
+python scripts/build_dataset.py   # writes racketfit/data/ and public/data/
 ```
 
 ## The web app
