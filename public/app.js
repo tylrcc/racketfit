@@ -80,50 +80,64 @@
     "Natural Gut": "#e8d6a8",
   };
 
-  // A clean tennis-racket illustration. Head oval scales with head size and the
-  // string grid reflects the actual pattern (e.g. 16x19).
+  function darken(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    r = Math.round(r * (1 - amt)); g = Math.round(g * (1 - amt)); b = Math.round(b * (1 - amt));
+    return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+  }
+
+  // Realistic, uniform tennis-racket render (transparent SVG): brand-colored
+  // frame with gloss, real string pattern, throat bridge, wrapped grip, butt cap.
   function racketSVG(r) {
-    const c = BRAND_COLOR[r.brand] || "#3b5998";
-    const mains = parseInt(String(r.string_pattern).split("x")[0], 10) || 16;
-    const crosses = parseInt(String(r.string_pattern).split("x")[1], 10) || 19;
-    const hw = 60, hh = 78; // head ellipse radii area (viewBox 140x220)
-    const cx = 70, cy = 70;
-    // string grid clipped to head ellipse
-    let lines = "";
-    for (let i = 1; i < mains; i++) {
-      const x = cx - hw + (2 * hw) * (i / mains);
-      lines += `<line x1="${x}" y1="${cy - hh}" x2="${x}" y2="${cy + hh}" />`;
-    }
-    for (let i = 1; i < crosses; i++) {
-      const y = cy - hh + (2 * hh) * (i / crosses);
-      lines += `<line x1="${cx - hw}" y1="${y}" x2="${cx + hw}" y2="${y}" />`;
-    }
-    return `<svg viewBox="0 0 140 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${r.brand} ${r.model}">
-      <defs><clipPath id="h${r.id}"><ellipse cx="${cx}" cy="${cy}" rx="${hw - 5}" ry="${hh - 5}"/></clipPath></defs>
-      <ellipse cx="${cx}" cy="${cy}" rx="${hw}" ry="${hh}" fill="#fbfcff" stroke="${c}" stroke-width="9"/>
-      <g clip-path="url(#h${r.id})" stroke="#c9d3e6" stroke-width="1.1">${lines}</g>
-      <ellipse cx="${cx}" cy="${cy}" rx="${hw}" ry="${hh}" fill="none" stroke="${c}" stroke-width="9" opacity=".9"/>
-      <path d="M52 ${cy + hh - 6} L62 200 M88 ${cy + hh - 6} L78 200" stroke="${c}" stroke-width="7" fill="none" stroke-linecap="round"/>
-      <rect x="60" y="196" width="20" height="20" rx="4" fill="${c}"/>
-      <rect x="58" y="150" width="24" height="52" rx="6" fill="none" stroke="${c}" stroke-width="6"/>
+    const c = BRAND_COLOR[r.brand] || "#3b5998", d = darken(c, 0.5);
+    const parts = String(r.string_pattern).split("x");
+    const mains = parseInt(parts[0], 10) || 16, crosses = parseInt(parts[1], 10) || 19;
+    const cx = 100, cy = 150, rx = 80, ry = 122, irx = rx - 9, iry = ry - 9;
+    let s = "";
+    for (let i = 1; i < mains; i++) { const x = cx - irx + (2 * irx) * (i / mains); s += `<line x1="${x}" y1="${cy - iry}" x2="${x}" y2="${cy + iry}"/>`; }
+    for (let i = 1; i < crosses; i++) { const y = cy - iry + (2 * iry) * (i / crosses); s += `<line x1="${cx - irx}" y1="${y}" x2="${cx + irx}" y2="${y}"/>`; }
+    let grip = "";
+    for (let i = 0; i < 8; i++) { const y = 366 + i * 13; grip += `<line x1="86" y1="${y}" x2="114" y2="${y - 8}" stroke="rgba(255,255,255,.13)" stroke-width="2"/>`; }
+    const gid = "rg" + r.id, cid = "rc" + r.id;
+    return `<svg viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${r.brand} ${r.model}">
+      <defs>
+        <linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c}"/><stop offset="1" stop-color="${d}"/></linearGradient>
+        <clipPath id="${cid}"><ellipse cx="${cx}" cy="${cy}" rx="${irx}" ry="${iry}"/></clipPath>
+      </defs>
+      <ellipse cx="100" cy="486" rx="30" ry="6" fill="rgba(15,23,42,.10)"/>
+      <ellipse cx="${cx}" cy="${cy}" rx="${irx}" ry="${iry}" fill="#fcfdff"/>
+      <g clip-path="url(#${cid})" stroke="#aeb8c8" stroke-width="1">${s}</g>
+      <path d="M64 250 L93 322" stroke="url(#${gid})" stroke-width="12" stroke-linecap="round"/>
+      <path d="M136 250 L107 322" stroke="url(#${gid})" stroke-width="12" stroke-linecap="round"/>
+      <rect x="90" y="300" width="20" height="172" rx="6" fill="url(#${gid})"/>
+      <rect x="86" y="356" width="28" height="116" rx="8" fill="#23262c"/>
+      ${grip}
+      <rect x="83" y="464" width="34" height="16" rx="5" fill="#15171c"/>
+      <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="url(#${gid})" stroke-width="12"/>
+      <ellipse cx="${cx - 3}" cy="${cy}" rx="${rx - 6}" ry="${ry - 6}" fill="none" stroke="#ffffff" stroke-opacity=".3" stroke-width="2"/>
     </svg>`;
   }
 
-  // A spool/reel of string, tinted by string type.
+  // Realistic coiled string set (transparent SVG), tinted by type, with a label.
   function stringSVG(s) {
-    const c = TYPE_COLOR[s.type] || "#5774a8";
+    const c = TYPE_COLOR[s.type] || "#5774a8", d = darken(c, 0.4);
     const bc = BRAND_COLOR[s.brand] || c;
-    let coils = "";
-    for (let i = 0; i < 7; i++) {
-      const y = 64 + i * 13;
-      coils += `<path d="M34 ${y} Q70 ${y - 9} 106 ${y}" stroke="${c}" stroke-width="4" fill="none" opacity="${0.55 + i * 0.06}"/>`;
-    }
-    return `<svg viewBox="0 0 140 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${s.brand} ${s.model}">
-      <rect x="26" y="44" width="88" height="112" rx="12" fill="#fbfcff" stroke="${bc}" stroke-width="6"/>
-      <rect x="26" y="44" width="88" height="26" rx="12" fill="${bc}"/>
-      ${coils}
-      <circle cx="70" cy="150" r="9" fill="${bc}"/>
+    return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${s.brand} ${s.model}">
+      <ellipse cx="100" cy="150" rx="76" ry="9" fill="rgba(15,23,42,.10)"/>
+      <ellipse cx="100" cy="100" rx="74" ry="52" fill="none" stroke="${c}" stroke-width="26"/>
+      <ellipse cx="100" cy="100" rx="74" ry="52" fill="none" stroke="${d}" stroke-width="26" stroke-dasharray="2 7" opacity=".55"/>
+      <ellipse cx="100" cy="100" rx="74" ry="52" fill="none" stroke="#ffffff" stroke-width="26" stroke-dasharray="1 26" opacity=".22"/>
+      <rect x="82" y="36" width="36" height="128" rx="7" fill="${bc}"/>
+      <rect x="82" y="36" width="36" height="128" rx="7" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
     </svg>`;
+  }
+
+  // Use a real product photo when an `image` URL is present, otherwise the
+  // vector render. A broken photo hides itself (the card keeps its layout).
+  function mediaFor(item, kind) {
+    if (item.image) return `<img class="real-photo" src="${item.image}" alt="${item.brand} ${item.model}" loading="lazy" onerror="this.remove()">`;
+    return kind === "racket" ? racketSVG(item) : stringSVG(item);
   }
 
   // --- home: map grid ---------------------------------------------------
@@ -258,7 +272,7 @@
       const isNew = r.year >= 2026 ? `<span class="new-badge">${t("results.new")}</span>` : "";
       card.innerHTML =
         `<span class="match-rank">${i === 0 ? t("results.bestmatch") : "#" + (i + 1)}</span>` +
-        `<div class="match-media">${racketSVG(r)}</div>` +
+        `<div class="match-media">${mediaFor(r, "racket")}</div>` +
         `<div class="match-body">` +
         `<div class="match-top"><span class="match-name">${r.brand} ${r.model} ${isNew}</span>` +
         `<span class="match-cat">${r.category} ${price}</span></div>` +
@@ -277,7 +291,7 @@
       const arm = s.arm_friendly ? `<span class="pill pill-soft">arm-friendly</span>` : "";
       card.innerHTML =
         `<span class="match-rank">${i === 0 ? t("results.toppick") : "#" + (i + 1)}</span>` +
-        `<div class="match-media">${stringSVG(s)}</div>` +
+        `<div class="match-media">${mediaFor(s, "string")}</div>` +
         `<div class="match-body">` +
         `<div class="match-top"><span class="match-name">${s.brand} ${s.model}</span>` +
         `<span class="match-cat">${s.type} · ${s.gauge} mm ${price}</span></div>` +
@@ -342,7 +356,7 @@
       rackets.forEach((r) => {
         const isNew = r.year >= 2026 ? `<span class="new-badge">${t("results.new")}</span>` : "";
         const card = el("div", "gcard");
-        card.innerHTML = `<div class="gcard-media gcard-media--racket">${racketSVG(r)}</div>` +
+        card.innerHTML = `<div class="gcard-media gcard-media--racket">${mediaFor(r, "racket")}</div>` +
           `<div class="gcard-name">${r.brand} ${r.model} ${isNew}</div>` +
           `<div class="gcard-meta">${r.year} · ${r.category}</div>` +
           `<div class="gcard-spec">${Math.round(r.head_size_sqin)} sq in · ${Math.round(r.strung_weight_g)} g · ${r.string_pattern} · RA ${Math.round(r.stiffness_ra)}</div>`;
@@ -389,7 +403,7 @@
       grid.innerHTML = "";
       strings.forEach((s) => {
         const card = el("div", "gcard");
-        card.innerHTML = `<div class="gcard-media gcard-media--string">${stringSVG(s)}</div>` +
+        card.innerHTML = `<div class="gcard-media gcard-media--string">${mediaFor(s, "string")}</div>` +
           `<div class="gcard-name">${s.brand} ${s.model}</div>` +
           `<div class="gcard-meta">${s.type} · ${s.gauge} mm</div>` +
           `<div class="gcard-spec">Spin ${s.spin} · Control ${s.control} · Power ${s.power} · Comfort ${s.comfort}</div>`;

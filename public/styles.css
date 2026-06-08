@@ -482,18 +482,19 @@ body { background: var(--paper); }
 }
 .gcard:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #bcc9e6; }
 .gcard-media { height: 150px; display: grid; place-items: center; margin-bottom: 10px; }
-.gcard-media svg { height: 100%; width: auto; }
+.gcard-media svg { height: 100%; width: auto; max-width: 100%; }
 .gcard-media--string svg { height: 128px; }
+.gcard-media img.real-photo, .match-media img.real-photo { max-width: 100%; max-height: 100%; object-fit: contain; }
+.gcard-media img.real-photo { max-height: 150px; }
 .gcard-name { font-family: var(--font-heading); font-weight: 800; letter-spacing: -.01em; font-size: 15px; }
 .gcard-meta { color: var(--muted); font-size: 12px; margin: 2px 0 6px; }
 .gcard-spec { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 
 /* ---------- results: small artwork beside each match ---------- */
-.match { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: start; }
-.match-media { width: 64px; display: grid; place-items: center; }
-.match-media svg { width: 64px; height: auto; max-height: 100px; }
+.match { display: grid; grid-template-columns: 72px 1fr; gap: 16px; align-items: start; }
+.match-media { width: 72px; display: grid; place-items: center; }
+.match-media svg { max-width: 100%; max-height: 104px; width: auto; height: auto; }
 @media (max-width: 480px) {
-  .match { grid-template-columns: 48px 1fr; gap: 12px; }
-  .match-media { width: 48px; }
-  .match-media svg { width: 48px; }
+  .match { grid-template-columns: 54px 1fr; gap: 12px; }
+  .match-media { width: 54px; }
 }
