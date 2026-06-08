@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RacketFit — Find your perfect tennis racket, string, tension & grip</title>
+  <meta name="description" content="Take a 60-second quiz and get your complete 2026 tennis setup: racket, string, stringing tension, and grip size. 158 rackets (2016-2026), 49 strings. No sign-up." />
+  <meta property="og:title" content="RacketFit — Your complete 2026 tennis setup in one quiz" />
+  <meta property="og:description" content="Racket, string, tension, and grip size, personalized in 60 seconds. 158 rackets, 49 strings, no sign-up." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#1f6f4a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="ball">🎾</span>
+      <span class="brand-name">Racket<strong>Fit</strong></span>
+    </div>
+    <a class="ghost-link" href="#" id="restartLink" hidden>Start over</a>
+  </header>
+
+  <main class="container">
+
+    <!-- INTRO -->
+    <section id="intro" class="panel intro">
+      <p class="eyebrow">Your complete 2026 setup in 60 seconds</p>
+      <h1>Everything you need, in one quiz.</h1>
+      <p class="lede">
+        Answer a few questions about your game. We build your target spec profile,
+        then tell you exactly what to play: the racket, the string, the tension,
+        and your grip size. Every 2026 release included. No sign-up.
+      </p>
+      <button class="btn btn-primary btn-lg" id="startBtn">Take the quiz →</button>
+      <ul class="trust">
+        <li><strong>158</strong> rackets</li>
+        <li><strong>49</strong> strings</li>
+        <li><strong>2016–26</strong> covered</li>
+        <li><strong>0</strong> sign-ups</li>
+      </ul>
+    </section>
+
+    <!-- SURVEY -->
+    <section id="survey" class="panel" hidden>
+      <div class="progress">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">Question 1</span>
+      </div>
+      <div id="questionMount"></div>
+      <div class="survey-nav">
+        <button class="btn btn-ghost" id="backBtn">← Back</button>
+        <button class="btn btn-primary" id="nextBtn" disabled>Next →</button>
+      </div>
+    </section>
+
+    <!-- LOADING -->
+    <section id="loading" class="panel center" hidden>
+      <div class="spinner"></div>
+      <p>Matching your game to the gear database…</p>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="panel results" hidden>
+      <div class="results-head">
+        <p class="eyebrow">Your results</p>
+        <h2>Here is your complete setup</h2>
+      </div>
+
+      <div class="setup-banner" id="setupBanner" hidden></div>
+      <div class="ideal-card" id="idealCard"></div>
+
+      <h3 class="section-title">🎾 Your top racket matches</h3>
+      <div id="matchList" class="match-list"></div>
+
+      <h3 class="section-title">🧵 Your recommended strings</h3>
+      <div id="stringList" class="match-list"></div>
+
+      <div class="kit-row">
+        <div class="kit-card" id="tensionCard"></div>
+        <div class="kit-card" id="gripCard"></div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn btn-ghost" id="redoBtn">Retake quiz</button>
+        <button class="btn btn-secondary" id="browseBtn">Browse all rackets</button>
+      </div>
+
+      <p class="disclaimer" id="disclaimer"></p>
+    </section>
+
+    <!-- BROWSE -->
+    <section id="browse" class="panel" hidden>
+      <div class="results-head">
+        <p class="eyebrow">The database</p>
+        <h2>All rackets <span id="browseCount" class="muted-count"></span></h2>
+      </div>
+      <input type="text" id="browseFilter" class="num-input" placeholder="Filter by brand or model (e.g. Blade, Yonex, 2026)…" />
+      <div class="table-wrap">
+        <table class="racket-table" id="racketTable">
+          <thead>
+            <tr>
+              <th>Racket</th><th>Year</th><th>Head</th><th>Weight</th><th>Balance</th>
+              <th>SW</th><th>RA</th><th>Pattern</th><th>Category</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="results-actions">
+        <button class="btn btn-ghost" id="browseBackBtn">← Back to results</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>RacketFit is open source. Specs are approximate manufacturer values, always demo before you buy.</p>
+  </footer>
+
+  <script src="/engine.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Only the static site in public/ is deployed; ignore the Python package & tooling.
+racketfit/
+tests/
+scripts/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+pyproject.toml
+CHANGELOG.md
