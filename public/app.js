@@ -70,7 +70,7 @@
           wrap.querySelectorAll(".option").forEach((o) => o.classList.remove("selected"));
           node.classList.add("selected");
           validate();
-          setTimeout(next, 220); // auto-advance, votely-style
+          setTimeout(next, 220); // auto-advance to the next question
         });
         wrap.appendChild(node);
       });
@@ -188,7 +188,7 @@
       $("#tensionCard").innerHTML =
         `<div class="kit-icon">🎯</div><div class="kit-label">Stringing tension</div>` +
         `<div class="kit-value">${t.ideal} lbs</div>` +
-        `<div class="kit-sub">recommended range ${t.lo}–${t.hi} lbs</div>` +
+        `<div class="kit-sub">recommended range ${t.lo}-${t.hi} lbs</div>` +
         `<ul class="kit-notes">${t.notes.map((n) => `<li>${n}</li>`).join("")}</ul>`;
     }
 

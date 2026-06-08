@@ -25,7 +25,7 @@ from .survey import SURVEY
 
 
 def _ask_interactive() -> PlayerProfile:
-    print("\n  RacketFit — let's find your specs.\n")
+    print("\n  RacketFit: let's find your specs.\n")
     answers: dict = {}
     for q in SURVEY:
         print(f"\033[1m{q['title']}\033[0m")
@@ -46,7 +46,7 @@ def _ask_interactive() -> PlayerProfile:
 
         options = q["options"]
         for i, opt in enumerate(options, 1):
-            print(f"  {i}. \033[1m{opt['label']}\033[0m — {opt['desc']}")
+            print(f"  {i}. \033[1m{opt['label']}\033[0m: {opt['desc']}")
         while True:
             raw = input("  > ").strip()
             if raw.isdigit() and 1 <= int(raw) <= len(options):

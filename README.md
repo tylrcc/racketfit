@@ -1,5 +1,10 @@
 # 🎾 RacketFit
 
+[![Live demo](https://img.shields.io/badge/demo-racketfit.vercel.app-1f6f4a)](https://racketfit.vercel.app)
+[![CI](https://github.com/tylrcc/racketfit/actions/workflows/ci.yml/badge.svg)](https://github.com/tylrcc/racketfit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+
 **Take a quiz, get your complete 2026 tennis setup.** Answer a few questions and
 RacketFit tells you everything you need in one place:
 
@@ -9,7 +14,7 @@ RacketFit tells you everything you need in one place:
 - the **tension** to string it at, and
 - your **grip size**.
 
-**▶ Live: https://racketfit.vercel.app** — take the quiz now, nothing to install.
+**▶ Live: https://racketfit.vercel.app**. Take the quiz now, nothing to install.
 
 RacketFit ships two ways that share the same data and logic:
 
@@ -140,7 +145,7 @@ individually too.
 2. **Score each racket.** For every numeric spec, a racket scores `1.0` at your
    ideal and decays toward `0` as it moves outside your comfortable range
    (`racketfit/models.py:SpecTarget`). String pattern is matched categorically.
-3. **Rank.** Scores are combined with per-spec weights into a 0–100 match, then
+3. **Rank.** Scores are combined with per-spec weights into a 0-100 match, then
    sorted. The engine also generates the reasons and cautions you see.
 
 ## Project layout
