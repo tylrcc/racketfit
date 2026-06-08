@@ -23,17 +23,18 @@
 
     <!-- INTRO -->
     <section id="intro" class="panel intro">
-      <p class="eyebrow">Find your specs in 60 seconds</p>
-      <h1>The right racket is a spec sheet, not a brand.</h1>
+      <p class="eyebrow">Your complete 2026 setup in 60 seconds</p>
+      <h1>Everything you need, in one quiz.</h1>
       <p class="lede">
-        Answer a few questions about your game. We translate your answers into a
-        target spec profile (head size, weight, balance, stiffness, string pattern)
-        and rank real rackets by how closely they match.
+        Answer a few questions about your game. We build your target spec profile,
+        then tell you exactly what to play: the racket, the string, the tension,
+        and your grip size. Every 2026 release included. No sign-up.
       </p>
-      <button class="btn btn-primary btn-lg" id="startBtn">Take the survey →</button>
+      <button class="btn btn-primary btn-lg" id="startBtn">Take the quiz →</button>
       <ul class="trust">
-        <li><strong>30</strong> rackets</li>
-        <li><strong>6</strong> brands</li>
+        <li><strong>40</strong> rackets</li>
+        <li><strong>17</strong> strings</li>
+        <li><strong>2026</strong> ready</li>
         <li><strong>0</strong> sign-ups</li>
       </ul>
     </section>
@@ -61,13 +62,23 @@
     <section id="results" class="panel results" hidden>
       <div class="results-head">
         <p class="eyebrow">Your results</p>
-        <h2>Here is what fits your game</h2>
+        <h2>Here is your complete setup</h2>
       </div>
+
+      <div class="setup-banner" id="setupBanner" hidden></div>
 
       <div class="ideal-card" id="idealCard"></div>
 
-      <h3 class="section-title">Your top matches</h3>
+      <h3 class="section-title">🎾 Your top racket matches</h3>
       <div id="matchList" class="match-list"></div>
+
+      <h3 class="section-title">🧵 Your recommended strings</h3>
+      <div id="stringList" class="match-list"></div>
+
+      <div class="kit-row">
+        <div class="kit-card" id="tensionCard"></div>
+        <div class="kit-card" id="gripCard"></div>
+      </div>
 
       <div class="results-actions">
         <button class="btn btn-ghost" id="redoBtn">Retake survey</button>

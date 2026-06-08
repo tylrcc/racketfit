@@ -85,6 +85,15 @@ SURVEY: List[Dict[str, Any]] = [
         ],
     },
     {
+        "key": "hand_length_in",
+        "title": "Measure your hand for grip size (optional)",
+        "help": "Open your hitting hand and measure in inches from the middle crease of your palm to the tip of your ring finger. That number is your grip size. Leave blank and we will guide you.",
+        "type": "number",
+        "optional": True,
+        "step": "0.125",
+        "placeholder": "e.g. 4.25",
+    },
+    {
         "key": "budget_usd",
         "title": "Any budget cap? (optional)",
         "help": "We will only show rackets at or under this MSRP. Leave blank for no limit.",

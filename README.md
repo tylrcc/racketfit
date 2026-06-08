@@ -1,9 +1,13 @@
 # 🎾 RacketFit
 
-**Find the tennis racket specs that fit your game.** Take a short survey, get a
-personalized target spec profile (head size, weight, balance, stiffness, string
-pattern) and a ranked list of real rackets that match, each with plain-English
-reasons.
+**Take a quiz, get your complete 2026 tennis setup.** Answer a few questions and
+RacketFit tells you everything you need in one place:
+
+- a **target spec profile** (head size, weight, balance, stiffness, string pattern),
+- your **top racket matches**, every 2026 release included, each with reasons,
+- the **string** to put in it,
+- the **tension** to string it at, and
+- your **grip size**.
 
 RacketFit has **zero runtime dependencies**, it runs on the Python standard
 library alone. There is nothing to `pip install` for users, just run it.
@@ -42,12 +46,15 @@ racketfit --web      # launch the web app
 
 ## The web app
 
-A clean, mobile-friendly multi-step survey. Answer 8 questions, get:
+A clean, mobile-friendly, one-question-per-screen quiz. Answer 9 questions, get:
 
+- A **complete setup** headline: racket + string + tension + grip.
 - **Your target spec profile** as a card of numbers to shop with.
-- **Your top 5 matches**, each with a match %, the key specs, and why it fits
-  (or where it deviates).
-- **Browse all rackets** in a sortable spec table.
+- **Your top 5 racket matches**, each with a match %, the key specs, a `NEW 2026`
+  badge where relevant, and why it fits (or where it deviates).
+- **Recommended strings** with fit %, plus a personalized **tension** and **grip
+  size**.
+- **Browse all rackets** in a spec table.
 
 ```bash
 python -m racketfit.web --port 8080            # custom port
@@ -73,7 +80,7 @@ Run `racketfit --help` for every option.
 ## Use it as a library
 
 ```python
-from racketfit import PlayerProfile, recommend
+from racketfit import PlayerProfile, build_report
 
 profile = PlayerProfile(
     skill_level="intermediate",
@@ -83,15 +90,20 @@ profile = PlayerProfile(
     spin_priority="high",
     maneuverability_priority="medium",
     arm_sensitive=False,
+    hand_length_in=4.25,   # optional, for grip size
 )
 
-for rec in recommend(profile, top_n=3):
-    print(f"{rec.score:.0f}%  {rec.racket.name}")
-    for reason in rec.reasons:
-        print("   ✓", reason)
+report = build_report(profile, top_n=3)
+print(report["summary"])                  # "Racket + String @ N lbs, grip ..."
+print(report["recommendations"][0]["name"])
+print(report["string"]["name"], report["tension"]["ideal"], "lbs")
+print(report["grip"]["label"])
 ```
 
-`recommend_with_ideal(profile)` also returns the derived target spec.
+Prefer just the rackets? `recommend(profile, top_n=3)` returns the racket
+matches, and `recommend_with_ideal(profile)` adds the derived target spec.
+`recommend_strings`, `recommend_tension`, and `recommend_grip` are available
+individually too.
 
 ## How the matching works
 
@@ -109,23 +121,27 @@ for rec in recommend(profile, top_n=3):
 
 ```
 racketfit/
-  models.py        # dataclasses: PlayerProfile, Racket, IdealSpec, ...
+  models.py        # dataclasses: PlayerProfile, Racket, TennisString, ...
   profile.py       # survey answers -> target spec
-  engine.py        # scoring + ranking + explanations
+  engine.py        # racket scoring + ranking + explanations
+  strings.py       # string matching + tension
+  grip.py          # grip-size logic
+  report.py        # composes the full report (racket+string+tension+grip)
   database.py      # loads the bundled racket data
   survey.py        # the questions (shared by web + CLI)
   cli.py           # terminal interface
   web.py           # zero-dependency web server + JSON API
   data/rackets.json
+  data/strings.json
   web_static/      # index.html, styles.css, app.js
 tests/
 ```
 
 ## Contributing
 
-The most valuable contribution is **more rackets**. Add entries to
-`racketfit/data/rackets.json` following the documented schema (`_meta.schema`),
-then run the tests:
+The most valuable contribution is **more gear**. Add rackets to
+`racketfit/data/rackets.json` (schema in `_meta.schema`) or strings to
+`racketfit/data/strings.json`, then run the tests:
 
 ```bash
 pip install -e ".[dev]"

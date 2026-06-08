@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "racketfit"
-version = "1.0.0"
-description = "Find tennis racket specs that fit your game: take a short survey, get a target spec profile and ranked racket matches."
+version = "2.0.0"
+description = "Take a quiz, get your complete 2026 tennis setup: target spec profile, ranked rackets, string, tension, and grip size, all in one place."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "tylrcc" }]
-keywords = ["tennis", "racket", "racquet", "specs", "recommendation", "survey"]
+keywords = ["tennis", "racket", "racquet", "strings", "tension", "grip", "specs", "recommendation", "quiz", "2026"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",

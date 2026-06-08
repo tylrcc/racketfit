@@ -12,7 +12,7 @@ import sys
 from typing import Optional
 
 from . import __version__
-from .engine import recommend_with_ideal
+from .report import build_report
 from .models import (
     PRIORITIES,
     PLAY_STYLES,
@@ -34,7 +34,13 @@ def _ask_interactive() -> PlayerProfile:
 
         if q["type"] == "number":
             raw = input("  > ").strip()
-            answers[q["key"]] = int(raw) if raw.isdigit() else None
+            value = None
+            if raw:
+                try:
+                    value = float(raw) if "." in raw else int(raw)
+                except ValueError:
+                    value = None
+            answers[q["key"]] = value
             print()
             continue
 
@@ -63,6 +69,7 @@ def _profile_from_args(args: argparse.Namespace) -> PlayerProfile:
             "maneuverability_priority": args.maneuver,
             "arm_sensitive": args.arm_sensitive,
             "budget_usd": args.budget,
+            "hand_length_in": args.hand,
         }
     )
 
@@ -73,34 +80,69 @@ def _bar(score: float, width: int = 24) -> str:
 
 
 def _print_results(profile: PlayerProfile, top_n: int) -> None:
-    ideal, recs = recommend_with_ideal(profile, top_n=top_n)
+    report = build_report(profile, top_n=top_n)
+    ideal = report["ideal"]
+
+    if report.get("summary"):
+        print("\n\033[1m  YOUR COMPLETE SETUP\033[0m")
+        print(f"  \033[32m{report['summary']}\033[0m")
 
     print("\n\033[1m  Your target spec profile\033[0m")
-    for key, t in ideal.targets.items():
-        print(f"  {t.label:<12} ~ {round(t.ideal,1)}{t.unit}")
-    if ideal.prefer_open_pattern is not None:
-        pat = "open (more spin)" if ideal.prefer_open_pattern else "dense (more control)"
+    for t in ideal["targets"].values():
+        print(f"  {t['label']:<12} ~ {t['ideal']}{t['unit']}")
+    if ideal["prefer_open_pattern"] is not None:
+        pat = "open (more spin)" if ideal["prefer_open_pattern"] else "dense (more control)"
         print(f"  {'Pattern':<12} ~ {pat}")
-    for note in ideal.notes:
+    for note in ideal["notes"]:
         print(f"  \033[2m• {note}\033[0m")
 
-    print("\n\033[1m  Top matches\033[0m\n")
-    for rank, rec in enumerate(recs, 1):
-        r = rec.racket
-        price = f"  ${r.msrp_usd}" if r.msrp_usd else ""
-        print(f"  {rank}. \033[1m{r.name}\033[0m  ({r.category}){price}")
-        print(f"     \033[32m{_bar(rec.score)}\033[0m  {rec.score:.0f}% match")
+    print("\n\033[1m  Top racket matches\033[0m\n")
+    for rank, rec in enumerate(report["recommendations"], 1):
+        r = rec["racket"]
+        new = "  \033[33m[NEW 2026]\033[0m" if r.get("year", 0) >= 2026 else ""
+        price = f"  ${r['msrp_usd']}" if r.get("msrp_usd") else ""
+        print(f"  {rank}. \033[1m{rec['name']}\033[0m  ({r['category']}){price}{new}")
+        print(f"     \033[32m{_bar(rec['score'])}\033[0m  {rec['score']:.0f}% match")
         print(
-            f"     {int(r.head_size_sqin)} sq in · {int(r.strung_weight_g)} g · "
-            f"{r.balance_pts_hl:g} pts HL · RA {int(r.stiffness_ra)} · {r.string_pattern}"
+            f"     {int(r['head_size_sqin'])} sq in · {int(r['strung_weight_g'])} g · "
+            f"{r['balance_pts_hl']:g} pts HL · RA {int(r['stiffness_ra'])} · {r['string_pattern']}"
         )
-        for reason in rec.reasons[:2]:
+        for reason in rec["reasons"][:2]:
             print(f"     \033[32m✓\033[0m {reason}")
-        for caution in rec.cautions[:1]:
+        for caution in rec["cautions"][:1]:
             print(f"     \033[33m!\033[0m {caution}")
         print()
 
-    print("  \033[2mSpecs are approximate. Always demo before you buy.\033[0m\n")
+    # Strings
+    print("\033[1m  Recommended strings\033[0m\n")
+    for rank, srec in enumerate(report["strings"], 1):
+        s = srec["string"]
+        price = f"  ${s['price_usd']}" if s.get("price_usd") else ""
+        tag = " \033[32m(top pick)\033[0m" if rank == 1 else ""
+        print(f"  {rank}. \033[1m{srec['name']}\033[0m  ({s['type']}, {s['gauge']} mm){price}{tag}")
+        print(f"     \033[32m{_bar(srec['score'])}\033[0m  {srec['score']:.0f}% fit")
+        for reason in srec["reasons"][:2]:
+            print(f"     \033[32m✓\033[0m {reason}")
+        print()
+
+    # Tension
+    t = report.get("tension")
+    if t:
+        print("\033[1m  Recommended tension\033[0m")
+        print(f"  \033[32m{t['ideal']} lbs\033[0m  (range {t['lo']}-{t['hi']} lbs)")
+        for note in t["notes"][:2]:
+            print(f"  \033[2m• {note}\033[0m")
+        print()
+
+    # Grip
+    g = report["grip"]
+    print("\033[1m  Recommended grip size\033[0m")
+    qualifier = "" if g["confident"] else " (estimate)"
+    print(f"  \033[32m{g['label']}\033[0m{qualifier}")
+    for note in g["notes"][:2]:
+        print(f"  \033[2m• {note}\033[0m")
+
+    print(f"\n  \033[2m{report['disclaimer']}\033[0m\n")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -122,6 +164,7 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--maneuver", choices=PRIORITIES, default="medium")
     g.add_argument("--arm-sensitive", action="store_true", help="prioritize arm comfort")
     g.add_argument("--budget", type=int, default=None, help="max MSRP in USD")
+    g.add_argument("--hand", type=float, default=None, help="hand measurement in inches (for grip size)")
     return p
 
 

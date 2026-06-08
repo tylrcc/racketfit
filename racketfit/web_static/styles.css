@@ -187,6 +187,45 @@ body {
 
 .error { color: #b3261e; font-weight: 600; }
 
+/* setup banner */
+.setup-banner {
+  display: flex; flex-direction: column; gap: 4px; margin-bottom: 22px;
+  padding: 18px 22px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--optic), var(--optic-soft));
+  border: 1px solid #cfe26a; box-shadow: var(--shadow);
+}
+.setup-label { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; color: #5c6b1e; }
+.setup-text { font-size: clamp(17px, 3vw, 22px); font-weight: 800; letter-spacing: -.02em; color: var(--ink); }
+
+/* new 2026 badge */
+.new-badge {
+  display: inline-block; vertical-align: middle; margin-left: 6px;
+  font-size: 10px; font-weight: 800; letter-spacing: .06em;
+  background: var(--court); color: #fff; padding: 3px 8px; border-radius: 999px;
+}
+
+/* small pills */
+.pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; margin-left: 6px; }
+.pill-soft { background: #e7f6ec; color: var(--court); border: 1px solid #bfe6cd; }
+
+/* kit cards (tension + grip) */
+.kit-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.kit-card {
+  border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: #fff;
+  box-shadow: var(--shadow);
+}
+.kit-icon { font-size: 26px; }
+.kit-label { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; margin-top: 6px; }
+.kit-value { font-size: 30px; font-weight: 800; letter-spacing: -.03em; color: var(--court); }
+.kit-sub { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+.kit-notes { display: grid; gap: 6px; }
+.kit-notes li { list-style: none; font-size: 13px; color: var(--muted); padding-left: 16px; position: relative; }
+.kit-notes li::before { content: "›"; position: absolute; left: 2px; color: var(--court); }
+
+@media (max-width: 560px) {
+  .kit-row { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 560px) {
   .panel { padding: 26px 20px; }
   .trust { gap: 18px; }

@@ -33,6 +33,7 @@ class PlayerProfile:
     maneuverability_priority: str = "medium"
     arm_sensitive: bool = False  # tennis elbow / wants max comfort
     budget_usd: Optional[int] = None  # optional hard cap on MSRP
+    hand_length_in: Optional[float] = None  # palm-crease to ring-fingertip, for grip
 
     def validate(self) -> None:
         """Raise ValueError if any answer is outside its vocabulary."""
@@ -53,6 +54,8 @@ class PlayerProfile:
             raise ValueError("arm_sensitive must be a boolean")
         if self.budget_usd is not None and self.budget_usd <= 0:
             raise ValueError("budget_usd must be a positive number or null")
+        if self.hand_length_in is not None and not (2.5 <= self.hand_length_in <= 6.0):
+            raise ValueError("hand_length_in must be between 2.5 and 6.0 inches or null")
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "PlayerProfile":
@@ -207,4 +210,88 @@ class Recommendation:
             ],
             "reasons": self.reasons,
             "cautions": self.cautions,
+        }
+
+
+@dataclass
+class TennisString:
+    """A string and its (relative) playing characteristics."""
+
+    id: str
+    brand: str
+    model: str
+    type: str  # Polyester | Multifilament | Synthetic Gut | Natural Gut
+    gauge: str
+    shape: str
+    power: int
+    control: int
+    spin: int
+    comfort: int
+    durability: int
+    feel: int
+    arm_friendly: bool
+    tension_lo: int
+    tension_hi: int
+    price_usd: Optional[int] = None
+    best_for: str = ""
+
+    @property
+    def name(self) -> str:
+        return f"{self.brand} {self.model}"
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "TennisString":
+        allowed = {f for f in cls.__dataclass_fields__}  # type: ignore[attr-defined]
+        return cls(**{k: v for k, v in data.items() if k in allowed})
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class StringRecommendation:
+    """A scored string result with reasons."""
+
+    string: TennisString
+    score: float  # 0..100
+    reasons: List[str] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "string": self.string.to_dict(),
+            "name": self.string.name,
+            "type": self.string.type,
+            "score": round(self.score, 1),
+            "reasons": self.reasons,
+        }
+
+
+@dataclass
+class TensionRecommendation:
+    """A recommended stringing tension range (in pounds)."""
+
+    lo: int
+    hi: int
+    ideal: int
+    notes: List[str] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {"lo": self.lo, "hi": self.hi, "ideal": self.ideal, "notes": self.notes}
+
+
+@dataclass
+class GripRecommendation:
+    """A recommended grip size."""
+
+    label: str  # e.g. "4 3/8 (L3)"
+    inches: float
+    confident: bool  # False when we had to guess without a measurement
+    notes: List[str] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "label": self.label,
+            "inches": self.inches,
+            "confident": self.confident,
+            "notes": self.notes,
         }

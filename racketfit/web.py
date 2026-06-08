@@ -20,8 +20,9 @@ from pathlib import Path
 from typing import Any
 
 from .database import database_meta, load_rackets
-from .engine import recommend_with_ideal
 from .models import PlayerProfile
+from .report import build_report
+from .strings import load_strings
 from .survey import SURVEY
 
 _STATIC_DIR = Path(__file__).parent / "web_static"
@@ -82,6 +83,9 @@ class _Handler(BaseHTTPRequestHandler):
                 }
             )
             return
+        if route == "/api/strings":
+            self._send_json({"strings": [s.to_dict() for s in load_strings()]})
+            return
 
         # static asset (guarded against path traversal)
         rel = route.lstrip("/")
@@ -103,14 +107,7 @@ class _Handler(BaseHTTPRequestHandler):
             data = json.loads(raw or b"{}")
             profile = PlayerProfile.from_dict(data.get("profile", data))
             top_n = int(data.get("top_n", 5))
-            ideal, recs = recommend_with_ideal(profile, top_n=top_n)
-            self._send_json(
-                {
-                    "profile": profile.to_dict(),
-                    "ideal": ideal.to_dict(),
-                    "recommendations": [r.to_dict() for r in recs],
-                }
-            )
+            self._send_json(build_report(profile, top_n=top_n))
         except ValueError as exc:
             self._send_json({"error": str(exc)}, status=400)
         except Exception as exc:  # noqa: BLE001 - report cleanly to client

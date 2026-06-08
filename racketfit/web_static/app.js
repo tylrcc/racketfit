@@ -158,11 +158,12 @@
       const r = rec.racket;
       const card = el("div", "match" + (i === 0 ? " top" : ""));
       const price = r.msrp_usd ? `<span class="match-price">$${r.msrp_usd}</span>` : "";
+      const isNew = r.year >= 2026 ? `<span class="new-badge">NEW 2026</span>` : "";
       const reasons = rec.reasons.map((x) => `<li class="good">${x}</li>`).join("");
       const cautions = rec.cautions.map((x) => `<li class="warn">${x}</li>`).join("");
       card.innerHTML =
         `<span class="match-rank">${i === 0 ? "BEST MATCH" : "#" + (i + 1)}</span>` +
-        `<div class="match-top"><span class="match-name">${r.brand} ${r.model}</span>` +
+        `<div class="match-top"><span class="match-name">${r.brand} ${r.model} ${isNew}</span>` +
         `<span class="match-cat">${r.category} ${price}</span></div>` +
         `<div class="score-row"><div class="score-track"><div class="score-bar"></div></div>` +
         `<span class="score-pct">${rec.score}%</span></div>` +
@@ -170,16 +171,66 @@
         `${r.balance_pts_hl} pts HL · SW ${Math.round(r.swingweight)} · RA ${Math.round(r.stiffness_ra)} · ${r.string_pattern}</div>` +
         `<ul class="reasons">${reasons}${cautions}</ul>`;
       list.appendChild(card);
-      // animate score bar
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          card.querySelector(".score-bar").style.width = `${rec.score}%`;
-        }, 60 + i * 90);
-      });
+      animateBar(card, rec.score, i);
     });
 
-    $("#disclaimer").textContent =
-      "Scores reflect how closely each racket's specs match your target profile. Specs are approximate, demo before you buy.";
+    // setup banner
+    if (data.summary) {
+      const b = $("#setupBanner");
+      b.hidden = false;
+      b.innerHTML = `<span class="setup-label">Your complete setup</span><span class="setup-text">${data.summary}</span>`;
+    }
+
+    // strings
+    const slist = $("#stringList");
+    slist.innerHTML = "";
+    (data.strings || []).forEach((srec, i) => {
+      const s = srec.string;
+      const card = el("div", "match" + (i === 0 ? " top" : ""));
+      const price = s.price_usd ? `<span class="match-price">$${s.price_usd}</span>` : "";
+      const reasons = srec.reasons.map((x) => `<li class="good">${x}</li>`).join("");
+      const arm = s.arm_friendly ? `<span class="pill pill-soft">arm-friendly</span>` : "";
+      card.innerHTML =
+        `<span class="match-rank">${i === 0 ? "TOP PICK" : "#" + (i + 1)}</span>` +
+        `<div class="match-top"><span class="match-name">${s.brand} ${s.model}</span>` +
+        `<span class="match-cat">${s.type} · ${s.gauge} mm ${price}</span></div>` +
+        `<div class="score-row"><div class="score-track"><div class="score-bar"></div></div>` +
+        `<span class="score-pct">${srec.score}%</span></div>` +
+        `<div class="spec-line">Spin ${s.spin} · Control ${s.control} · Power ${s.power} · Comfort ${s.comfort} ${arm}</div>` +
+        `<ul class="reasons">${reasons}</ul>`;
+      slist.appendChild(card);
+      animateBar(card, srec.score, i);
+    });
+
+    // tension
+    const t = data.tension;
+    if (t) {
+      $("#tensionCard").innerHTML =
+        `<div class="kit-icon">🎯</div><div class="kit-label">Stringing tension</div>` +
+        `<div class="kit-value">${t.ideal} lbs</div>` +
+        `<div class="kit-sub">recommended range ${t.lo}–${t.hi} lbs</div>` +
+        `<ul class="kit-notes">${t.notes.map((n) => `<li>${n}</li>`).join("")}</ul>`;
+    }
+
+    // grip
+    const g = data.grip;
+    $("#gripCard").innerHTML =
+      `<div class="kit-icon">✊</div><div class="kit-label">Grip size${g.confident ? "" : " (estimate)"}</div>` +
+      `<div class="kit-value">${g.label}</div>` +
+      `<div class="kit-sub">${g.inches}"</div>` +
+      `<ul class="kit-notes">${g.notes.map((n) => `<li>${n}</li>`).join("")}</ul>`;
+
+    $("#disclaimer").textContent = data.disclaimer ||
+      "Specs are approximate, demo before you buy.";
+  }
+
+  function animateBar(card, score, i) {
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const bar = card.querySelector(".score-bar");
+        if (bar) bar.style.width = `${score}%`;
+      }, 60 + i * 90);
+    });
   }
 
   // --- browse all --------------------------------------------------------
