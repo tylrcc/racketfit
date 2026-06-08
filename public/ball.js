@@ -46,12 +46,9 @@
     // ---- court surface texture: green with white line markings ----
     function courtTexture() {
       const { c, x } = makeCanvas(L, W);
-      x.fillStyle = "#3f9e63"; x.fillRect(0, 0, L, W);
-      for (let i = 0; i < 16; i++) { // subtle mow stripes
-        x.fillStyle = i % 2 ? "rgba(255,255,255,0.035)" : "rgba(0,0,0,0.04)";
-        x.fillRect(i * (L / 16), 0, L / 16, W);
-      }
-      x.strokeStyle = "#f5f8f3"; x.lineWidth = 6;
+      x.clearRect(0, 0, L, W);
+      x.fillStyle = "rgba(255,255,255,0.40)"; x.fillRect(0, 0, L, W); // light translucent surface
+      x.strokeStyle = "rgba(59,89,152,0.55)"; x.lineWidth = 5;       // thin slate lines
       const mx = 70, my = 64;
       const innerW = W - 2 * my, alley = innerW * 0.125;
       x.strokeRect(mx, my, L - 2 * mx, innerW); // doubles boundary
@@ -74,43 +71,36 @@
       const t = new THREE.CanvasTexture(c); t.anisotropy = 8; return t;
     }
 
-    // ---- net texture: white tape + mesh, transparent between strands ----
+    // ---- net texture: thin slate mesh + tape, transparent between strands ----
     function netTexture() {
       const { c, x } = makeCanvas(512, 128);
       x.clearRect(0, 0, 512, 128);
-      x.strokeStyle = "rgba(255,255,255,0.55)"; x.lineWidth = 1;
+      x.strokeStyle = "rgba(59,89,152,0.40)"; x.lineWidth = 1;
       for (let i = 0; i <= 512; i += 9) { x.beginPath(); x.moveTo(i, 20); x.lineTo(i, 128); x.stroke(); }
       for (let j = 20; j <= 128; j += 9) { x.beginPath(); x.moveTo(0, j); x.lineTo(512, j); x.stroke(); }
-      x.fillStyle = "#f5f8f3"; x.fillRect(0, 0, 512, 18); // top tape
+      x.fillStyle = "rgba(59,89,152,0.85)"; x.fillRect(0, 0, 512, 16); // top tape
       return new THREE.CanvasTexture(c);
     }
 
     const court = new THREE.Group();
 
+    // translucent court surface (minimal, see-through aesthetic)
     const surf = new THREE.Mesh(
       new THREE.PlaneGeometry(CL, CW),
-      new THREE.MeshStandardMaterial({ map: courtTexture(), roughness: 0.95, metalness: 0 })
+      new THREE.MeshBasicMaterial({ map: courtTexture(), transparent: true, side: THREE.DoubleSide, depthWrite: false })
     );
     surf.rotation.x = -Math.PI / 2;
     court.add(surf);
 
-    // court base slab (gives it thickness/edge)
-    const slab = new THREE.Mesh(
-      new THREE.BoxGeometry(CL + 0.3, 0.18, CW + 0.3),
-      new THREE.MeshStandardMaterial({ color: 0x2c6f47, roughness: 1 })
-    );
-    slab.position.y = -0.1;
-    court.add(slab);
-
     // net
     const net = new THREE.Mesh(
-      new THREE.PlaneGeometry(CW, 0.55),
+      new THREE.PlaneGeometry(CW, 0.5),
       new THREE.MeshBasicMaterial({ map: netTexture(), transparent: true, side: THREE.DoubleSide, depthWrite: false })
     );
     net.rotation.y = Math.PI / 2;
-    net.position.y = 0.275;
+    net.position.y = 0.25;
     court.add(net);
-    const postMat = new THREE.MeshStandardMaterial({ color: 0x1c2530, roughness: 0.6 });
+    const postMat = new THREE.MeshStandardMaterial({ color: 0x3b5998, roughness: 0.6 });
     [-CW / 2, CW / 2].forEach((z) => {
       const post = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.62, 16), postMat);
       post.position.set(0, 0.31, z);

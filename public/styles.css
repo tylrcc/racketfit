@@ -1,10 +1,10 @@
 :root {
-  /* Palette matched to votelyquiz.com (slate + periwinkle/royal blue) */
+  /* Palette: slate + periwinkle / royal blue */
   --court: #3b5998;        /* brand blue: links, accents, active states */
   --court-deep: #2a4173;
-  --cta: #0f172a;          /* dark slate primary button (votely CTA) */
+  --cta: #0f172a;          /* dark slate primary button */
   --cta-hover: #1e293b;
-  --optic: #93a8d1;        /* periwinkle accent (votely primary) */
+  --optic: #93a8d1;        /* periwinkle accent */
   --optic-soft: #c5d2e8;
   --ink: #0f172a;
   --paper: #eef1ef;
@@ -245,7 +245,7 @@ body {
 #browseFilter { margin-bottom: 16px; }
 
 /* ============================================================
-   votely-style shell: nav, hero, 3D ball, bands, footer
+   app shell: nav, hero, 3D court, bands, footer
    ============================================================ */
 
 :root { --nav-h: 64px; }
@@ -432,7 +432,7 @@ body { background: var(--paper); }
 
 /* ============================================================
    Additions: spinning logo cube, language picker, gallery,
-   segmented toggle, results media (votely-matched skin)
+   segmented toggle, results media
    ============================================================ */
 
 /* ---------- spinning tennis-ball logo (top-left + footer) ---------- */
