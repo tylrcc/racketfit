@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RacketFit: Find your perfect tennis racket, string, tension &amp; grip</title>
-  <meta name="description" content="Take a 60-second quiz and get your complete tennis setup: racket, string, stringing tension, and grip size. 158 rackets (2016 to 2026), 49 strings. No sign-up." />
+  <meta name="description" content="Take a 60-second quiz and get your complete tennis setup: racket, string, stringing tension, and grip size. Hundreds of rackets (2005 to 2026), dozens of strings. No sign-up." />
   <meta property="og:title" content="RacketFit: Your complete tennis setup in one quiz" />
-  <meta property="og:description" content="Racket, string, tension, and grip size, personalized in 60 seconds. 158 rackets, 49 strings, no sign-up." />
+  <meta property="og:description" content="Racket, string, tension, and grip size, personalized in 60 seconds. Hundreds of rackets, dozens of strings, no sign-up." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0d1f16" />
+  <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -17,17 +20,29 @@
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a class="nav-brand" href="#home" data-nav>
-        <span class="nav-ball">🎾</span><span>Racket<strong>Fit</strong></span>
+      <a class="nav-brand" href="/" data-nav data-view="home">
+        <span class="logo-cube" aria-hidden="true">
+          <span class="lc-face lc-front"></span>
+          <span class="lc-face lc-back"></span>
+          <span class="lc-face lc-right"></span>
+          <span class="lc-face lc-left"></span>
+          <span class="lc-face lc-top"></span>
+          <span class="lc-face lc-bottom"></span>
+        </span>
+        <span>Racket<strong>Fit</strong></span>
       </a>
       <nav class="nav-tabs" id="navTabs">
-        <a href="#home" data-nav class="nav-tab">Home</a>
-        <a href="#quiz" data-nav class="nav-tab">The Quiz</a>
-        <a href="#rackets" data-nav class="nav-tab">Rackets</a>
-        <a href="#strings" data-nav class="nav-tab">Strings</a>
-        <a href="#guide" data-nav class="nav-tab">Guide</a>
+        <a href="/" data-nav data-view="home" class="nav-tab" data-i18n="nav.home">Home</a>
+        <a href="/quiz" data-nav data-view="quiz" class="nav-tab" data-i18n="nav.quiz">The Quiz</a>
+        <a href="/rackets" data-nav data-view="rackets" class="nav-tab" data-i18n="nav.rackets">Rackets</a>
+        <a href="/strings" data-nav data-view="strings" class="nav-tab" data-i18n="nav.strings">Strings</a>
+        <a href="/guide" data-nav data-view="guide" class="nav-tab" data-i18n="nav.guide">Guide</a>
       </nav>
-      <a href="#quiz" data-nav class="btn btn-primary btn-sm nav-cta">Start quiz</a>
+      <div class="lang-wrap">
+        <span class="lang-globe" aria-hidden="true">🌐</span>
+        <select id="langSelect" class="lang-select" aria-label="Language"></select>
+      </div>
+      <a href="/quiz" data-nav data-view="quiz" class="btn btn-primary btn-sm nav-cta" data-i18n="nav.start">Start quiz</a>
       <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
     </div>
   </header>
@@ -40,29 +55,29 @@
     <div class="hero">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Your complete setup in 60 seconds</p>
-          <h1 class="hero-title">The right racket is a<br><span class="hl">spec sheet</span>, not a brand.</h1>
-          <p class="hero-sub">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Your complete setup in 60 seconds</p>
+          <h1 class="hero-title" data-i18n-html="hero.title">The right racket is a<br><span class="hl">spec sheet</span>, not a brand.</h1>
+          <p class="hero-sub" data-i18n="hero.sub">
             Answer a few questions about your game. RacketFit builds your target
             spec profile, then tells you exactly what to play: the racket, the
             string, the tension, and your grip size.
           </p>
           <div class="hero-cta">
-            <a href="#quiz" data-nav class="btn btn-primary btn-lg">Take the quiz →</a>
-            <a href="#rackets" data-nav class="btn btn-ghost btn-lg">Browse gear</a>
+            <a href="/quiz" data-nav data-view="quiz" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Take the quiz →</a>
+            <a href="/rackets" data-nav data-view="rackets" class="btn btn-ghost btn-lg" data-i18n="hero.cta2">Browse gear</a>
           </div>
           <ul class="trust">
-            <li><strong>158</strong> rackets</li>
-            <li><strong>49</strong> strings</li>
-            <li><strong>2016&ndash;26</strong> covered</li>
-            <li><strong>0</strong> sign-ups</li>
+            <li><strong id="statRackets">200+</strong> <span data-i18n="trust.rackets">rackets</span></li>
+            <li><strong id="statStrings">49</strong> <span data-i18n="trust.strings">strings</span></li>
+            <li><strong>2005 to 26</strong> <span data-i18n="trust.covered">covered</span></li>
+            <li><strong>0</strong> <span data-i18n="trust.signups">sign-ups</span></li>
           </ul>
         </div>
         <div class="hero-stage">
           <div class="ball-stage" id="ballStage">
             <div class="ball-fallback" id="ballFallback" aria-hidden="true"></div>
           </div>
-          <p class="ball-hint">Drag to spin</p>
+          <p class="ball-hint" data-i18n="ball.hint">Drag to spin</p>
         </div>
       </div>
     </div>
@@ -70,13 +85,13 @@
     <!-- HOW IT WORKS -->
     <section class="band">
       <div class="wrap">
-        <p class="eyebrow center">How it works</p>
-        <h2 class="band-title">Four answers in, a full setup out.</h2>
+        <p class="eyebrow center" data-i18n="how.eyebrow">How it works</p>
+        <h2 class="band-title" data-i18n="how.title">Four answers in, a full setup out.</h2>
         <div class="steps">
-          <div class="step"><div class="step-n">1</div><h3>Tell us your game</h3><p>Level, style, swing, spin, power, and any arm concerns. Nine quick questions.</p></div>
-          <div class="step"><div class="step-n">2</div><h3>We build your spec</h3><p>Each answer nudges a target head size, weight, balance, swingweight, and stiffness.</p></div>
-          <div class="step"><div class="step-n">3</div><h3>We rank real gear</h3><p>Every racket and string is scored against your target, best matches first.</p></div>
-          <div class="step"><div class="step-n">4</div><h3>You get the whole kit</h3><p>Racket, string, tension, and grip size, with plain-English reasons for each.</p></div>
+          <div class="step"><div class="step-n">1</div><h3 data-i18n="step1.t">Tell us your game</h3><p data-i18n="step1.d">Level, style, swing, spin, power, and any arm concerns. Nine quick questions.</p></div>
+          <div class="step"><div class="step-n">2</div><h3 data-i18n="step2.t">We build your spec</h3><p data-i18n="step2.d">Each answer nudges a target head size, weight, balance, swingweight, and stiffness.</p></div>
+          <div class="step"><div class="step-n">3</div><h3 data-i18n="step3.t">We rank real gear</h3><p data-i18n="step3.d">Every racket and string is scored against your target, best matches first.</p></div>
+          <div class="step"><div class="step-n">4</div><h3 data-i18n="step4.t">You get the whole kit</h3><p data-i18n="step4.d">Racket, string, tension, and grip size, with plain-English reasons for each.</p></div>
         </div>
       </div>
     </section>
@@ -84,9 +99,9 @@
     <!-- MAPPED GRID -->
     <section class="band band-alt">
       <div class="wrap">
-        <p class="eyebrow center">Every style, covered</p>
-        <h2 class="band-title">From first racket to tour control.</h2>
-        <p class="band-lead">Pick the profile that sounds like you, or take the quiz for an exact match.</p>
+        <p class="eyebrow center" data-i18n="map.eyebrow">Every style, covered</p>
+        <h2 class="band-title" data-i18n="map.title">From first racket to tour control.</h2>
+        <p class="band-lead" data-i18n="map.lead">Pick the profile that sounds like you, or take the quiz for an exact match.</p>
         <div class="map-grid" id="mapGrid"></div>
       </div>
     </section>
@@ -94,25 +109,25 @@
     <!-- WHY -->
     <section class="band">
       <div class="wrap">
-        <p class="eyebrow center">Why RacketFit</p>
-        <h2 class="band-title">Specs over hype.</h2>
+        <p class="eyebrow center" data-i18n="why.eyebrow">Why RacketFit</p>
+        <h2 class="band-title" data-i18n="why.title">Specs over hype.</h2>
         <div class="compare">
           <div class="compare-col">
-            <h3>Most racket finders</h3>
+            <h3 data-i18n="why.them.t">Most racket finders</h3>
             <ul class="x-list">
-              <li>Sort by brand or by what a pro endorses</li>
-              <li>Stop at the frame, you guess the rest</li>
-              <li>Hide the reasoning behind a black box</li>
-              <li>Push whatever is on sale</li>
+              <li data-i18n="why.them.1">Sort by brand or by what a pro endorses</li>
+              <li data-i18n="why.them.2">Stop at the frame, you guess the rest</li>
+              <li data-i18n="why.them.3">Hide the reasoning behind a black box</li>
+              <li data-i18n="why.them.4">Push whatever is on sale</li>
             </ul>
           </div>
           <div class="compare-col compare-col--us">
-            <h3>RacketFit</h3>
+            <h3 data-i18n="why.us.t">RacketFit</h3>
             <ul class="check-list">
-              <li>Matches the spec sheet to how you actually play</li>
-              <li>Gives you racket + string + tension + grip</li>
-              <li>Shows the exact reason for every pick</li>
-              <li>Open source, no affiliate agenda</li>
+              <li data-i18n="why.us.1">Matches the spec sheet to how you actually play</li>
+              <li data-i18n="why.us.2">Gives you racket + string + tension + grip</li>
+              <li data-i18n="why.us.3">Shows the exact reason for every pick</li>
+              <li data-i18n="why.us.4">Open source, no affiliate agenda</li>
             </ul>
           </div>
         </div>
@@ -122,17 +137,17 @@
     <!-- SAMPLE REPORT -->
     <section class="band band-alt">
       <div class="wrap">
-        <p class="eyebrow center">The payoff</p>
-        <h2 class="band-title">One screen with everything you need.</h2>
+        <p class="eyebrow center" data-i18n="sample.eyebrow">The payoff</p>
+        <h2 class="band-title" data-i18n="sample.title">One screen with everything you need.</h2>
         <div class="sample">
-          <div class="sample-banner">Your complete setup<br><strong>Wilson Blade 98 v9 + Solinco Hyper-G @ 50 lbs, grip 4 3/8</strong></div>
+          <div class="sample-banner"><span data-i18n="sample.label">Your complete setup</span><br><strong>Wilson Blade 98 v9 + Solinco Hyper-G @ 50 lbs, grip 4 3/8</strong></div>
           <div class="sample-row">
-            <div class="sample-card"><span class="sample-k">Racket</span><span class="sample-v">Blade 98 v9</span><span class="sample-d">94% match</span></div>
-            <div class="sample-card"><span class="sample-k">String</span><span class="sample-v">Hyper-G</span><span class="sample-d">spin + control</span></div>
-            <div class="sample-card"><span class="sample-k">Tension</span><span class="sample-v">50 lbs</span><span class="sample-d">48 to 52</span></div>
-            <div class="sample-card"><span class="sample-k">Grip</span><span class="sample-v">4 3/8</span><span class="sample-d">L3</span></div>
+            <div class="sample-card"><span class="sample-k" data-i18n="sample.k.racket">Racket</span><span class="sample-v" data-i18n="sample.v.racket">Blade 98 v9</span><span class="sample-d" data-i18n="sample.d.racket">94% match</span></div>
+            <div class="sample-card"><span class="sample-k" data-i18n="sample.k.string">String</span><span class="sample-v" data-i18n="sample.v.string">Hyper-G</span><span class="sample-d" data-i18n="sample.d.string">spin + control</span></div>
+            <div class="sample-card"><span class="sample-k" data-i18n="sample.k.tension">Tension</span><span class="sample-v" data-i18n="sample.v.tension">50 lbs</span><span class="sample-d" data-i18n="sample.d.tension">48 to 52</span></div>
+            <div class="sample-card"><span class="sample-k" data-i18n="sample.k.grip">Grip</span><span class="sample-v" data-i18n="sample.v.grip">4 3/8</span><span class="sample-d" data-i18n="sample.d.grip">L3</span></div>
           </div>
-          <a href="#quiz" data-nav class="btn btn-primary btn-lg">Get mine →</a>
+          <a href="/quiz" data-nav data-view="quiz" class="btn btn-primary btn-lg" data-i18n="sample.cta">Get mine →</a>
         </div>
       </div>
     </section>
@@ -140,14 +155,14 @@
     <!-- FAQ -->
     <section class="band">
       <div class="wrap wrap-narrow">
-        <p class="eyebrow center">Questions</p>
-        <h2 class="band-title">Good to know.</h2>
+        <p class="eyebrow center" data-i18n="faq.eyebrow">Questions</p>
+        <h2 class="band-title" data-i18n="faq.title">Good to know.</h2>
         <div class="faq" id="faq">
-          <details class="faq-item"><summary>Is this actually free?</summary><p>Yes. No account, no email, no paywall. RacketFit is open source and runs entirely in your browser.</p></details>
-          <details class="faq-item"><summary>How many rackets are in here?</summary><p>158 frames spanning 2016 to 2026 across Babolat, Wilson, Head, Yonex, Tecnifibre, Prince, Dunlop, Volkl, and Solinco, plus 49 strings.</p></details>
-          <details class="faq-item"><summary>Are the specs exact?</summary><p>They are approximate manufacturer values, rounded for comparison. Use them to build a shortlist, then demo before you buy. Some 2026 frames use projected specs.</p></details>
-          <details class="faq-item"><summary>Do I have to measure my hand?</summary><p>No. The grip question is optional. Leave it blank and we suggest the most common size with instructions to measure yourself.</p></details>
-          <details class="faq-item"><summary>Can I just browse instead of taking the quiz?</summary><p>Of course. The Rackets and Strings tabs let you search and filter the entire database.</p></details>
+          <details class="faq-item"><summary data-i18n="faq.q1">Is this actually free?</summary><p data-i18n="faq.a1">Yes. No account, no email, no paywall. RacketFit is open source and runs entirely in your browser.</p></details>
+          <details class="faq-item"><summary data-i18n="faq.q2">How many rackets are in here?</summary><p data-i18n="faq.a2">Hundreds of frames spanning 2005 to 2026 across Babolat, Wilson, Head, Yonex, Tecnifibre, Prince, Dunlop, Volkl, and Solinco, plus dozens of strings.</p></details>
+          <details class="faq-item"><summary data-i18n="faq.q3">Are the specs exact?</summary><p data-i18n="faq.a3">They are approximate manufacturer values, rounded for comparison. Use them to build a shortlist, then demo before you buy. Some 2026 frames use projected specs.</p></details>
+          <details class="faq-item"><summary data-i18n="faq.q4">Do I have to measure my hand?</summary><p data-i18n="faq.a4">No. The grip question is optional. Leave it blank and we suggest the most common size with instructions to measure yourself.</p></details>
+          <details class="faq-item"><summary data-i18n="faq.q5">Can I just browse instead of taking the quiz?</summary><p data-i18n="faq.a5">Of course. The Rackets and Strings tabs let you search and filter the entire database.</p></details>
         </div>
       </div>
     </section>
@@ -155,9 +170,9 @@
     <!-- CTA -->
     <section class="cta-band">
       <div class="wrap center">
-        <h2>Find your racket in 60 seconds.</h2>
-        <p>No sign-up. Just answers.</p>
-        <a href="#quiz" data-nav class="btn btn-secondary btn-lg">Take the quiz →</a>
+        <h2 data-i18n="cta.title">Find your racket in 60 seconds.</h2>
+        <p data-i18n="cta.sub">No sign-up. Just answers.</p>
+        <a href="/quiz" data-nav data-view="quiz" class="btn btn-secondary btn-lg" data-i18n="cta.btn">Take the quiz →</a>
       </div>
     </section>
   </section>
@@ -184,7 +199,7 @@
     <div class="wrap wrap-narrow view-pad">
       <div class="panel center">
         <div class="spinner"></div>
-        <p>Matching your game to the gear database...</p>
+        <p data-i18n="loading.text">Matching your game to the gear database...</p>
       </div>
     </div>
   </section>
@@ -194,22 +209,22 @@
     <div class="wrap wrap-narrow view-pad">
       <div class="panel results">
         <div class="results-head">
-          <p class="eyebrow">Your results</p>
-          <h2>Here is your complete setup</h2>
+          <p class="eyebrow" data-i18n="results.eyebrow">Your results</p>
+          <h2 data-i18n="results.title">Here is your complete setup</h2>
         </div>
         <div class="setup-banner" id="setupBanner" hidden></div>
         <div class="ideal-card" id="idealCard"></div>
-        <h3 class="section-title">🎾 Your top racket matches</h3>
+        <h3 class="section-title" data-i18n="results.toprackets">🎾 Your top racket matches</h3>
         <div id="matchList" class="match-list"></div>
-        <h3 class="section-title">🧵 Your recommended strings</h3>
+        <h3 class="section-title" data-i18n="results.topstrings">🧵 Your recommended strings</h3>
         <div id="stringList" class="match-list"></div>
         <div class="kit-row">
           <div class="kit-card" id="tensionCard"></div>
           <div class="kit-card" id="gripCard"></div>
         </div>
         <div class="results-actions">
-          <button class="btn btn-ghost" id="redoBtn">Retake quiz</button>
-          <a href="#rackets" data-nav class="btn btn-secondary">Browse all rackets</a>
+          <button class="btn btn-ghost" id="redoBtn" data-i18n="results.retake">Retake quiz</button>
+          <a href="/rackets" data-nav data-view="rackets" class="btn btn-secondary" data-i18n="results.browseall">Browse all rackets</a>
         </div>
         <p class="disclaimer" id="disclaimer"></p>
       </div>
@@ -219,16 +234,24 @@
   <!-- ============ RACKETS ============ -->
   <section class="view" id="view-rackets" hidden>
     <div class="wrap view-pad">
-      <div class="results-head">
-        <p class="eyebrow">The database</p>
-        <h2>All rackets <span id="browseCount" class="muted-count"></span></h2>
+      <div class="results-head browse-head">
+        <div>
+          <p class="eyebrow" data-i18n="rackets.eyebrow">The database</p>
+          <h2 data-i18n="rackets.title">All rackets <span id="browseCount" class="muted-count"></span></h2>
+        </div>
+        <div class="seg-toggle" id="racketToggle">
+          <button class="seg active" data-mode="grid" data-i18n="view.grid">Gallery</button>
+          <button class="seg" data-mode="table" data-i18n="view.table">Table</button>
+        </div>
       </div>
-      <input type="text" id="browseFilter" class="num-input" placeholder="Filter by brand, model, or year (e.g. Blade, Yonex, 2026)..." />
-      <div class="table-wrap">
+      <input type="text" id="browseFilter" class="num-input" data-i18n-ph="rackets.filter" placeholder="Filter by brand, model, or year..." />
+      <div class="gallery" id="racketGrid"></div>
+      <div class="table-wrap" id="racketTableWrap" hidden>
         <table class="racket-table" id="racketTable">
           <thead><tr>
-            <th>Racket</th><th>Year</th><th>Head</th><th>Weight</th><th>Balance</th>
-            <th>SW</th><th>RA</th><th>Pattern</th><th>Category</th>
+            <th data-i18n="th.racket">Racket</th><th data-i18n="th.year">Year</th><th data-i18n="th.head">Head</th>
+            <th data-i18n="th.weight">Weight</th><th data-i18n="th.balance">Balance</th>
+            <th data-i18n="th.sw">SW</th><th data-i18n="th.ra">RA</th><th data-i18n="th.pattern">Pattern</th><th data-i18n="th.category">Category</th>
           </tr></thead>
           <tbody></tbody>
         </table>
@@ -239,16 +262,23 @@
   <!-- ============ STRINGS ============ -->
   <section class="view" id="view-strings" hidden>
     <div class="wrap view-pad">
-      <div class="results-head">
-        <p class="eyebrow">The database</p>
-        <h2>All strings <span id="stringCount" class="muted-count"></span></h2>
+      <div class="results-head browse-head">
+        <div>
+          <p class="eyebrow" data-i18n="strings.eyebrow">The database</p>
+          <h2 data-i18n="strings.title">All strings <span id="stringCount" class="muted-count"></span></h2>
+        </div>
+        <div class="seg-toggle" id="stringToggle">
+          <button class="seg active" data-mode="grid" data-i18n="view.grid">Gallery</button>
+          <button class="seg" data-mode="table" data-i18n="view.table">Table</button>
+        </div>
       </div>
-      <input type="text" id="stringFilter" class="num-input" placeholder="Filter by brand, model, or type (e.g. poly, Luxilon, gut)..." />
-      <div class="table-wrap">
+      <input type="text" id="stringFilter" class="num-input" data-i18n-ph="strings.filter" placeholder="Filter by brand, model, or type..." />
+      <div class="gallery" id="stringGrid"></div>
+      <div class="table-wrap" id="stringTableWrap" hidden>
         <table class="racket-table" id="stringTable">
           <thead><tr>
-            <th>String</th><th>Type</th><th>Gauge</th><th>Spin</th><th>Control</th>
-            <th>Power</th><th>Comfort</th><th>Arm</th><th>Price</th>
+            <th data-i18n="th.string">String</th><th data-i18n="th.type">Type</th><th data-i18n="th.gauge">Gauge</th><th data-i18n="th.spin">Spin</th>
+            <th data-i18n="th.control">Control</th><th data-i18n="th.power">Power</th><th data-i18n="th.comfort">Comfort</th><th data-i18n="th.arm">Arm</th><th data-i18n="th.price">Price</th>
           </tr></thead>
           <tbody></tbody>
         </table>
@@ -260,27 +290,27 @@
   <section class="view" id="view-guide" hidden>
     <div class="wrap wrap-narrow view-pad">
       <div class="results-head">
-        <p class="eyebrow">Guide</p>
-        <h2>How the matching works</h2>
+        <p class="eyebrow" data-i18n="guide.eyebrow">Guide</p>
+        <h2 data-i18n="guide.title">How the matching works</h2>
       </div>
       <div class="prose">
-        <p>Picking a racket by brand is a trap. What matters is the spec sheet: a heavier, head-light, flexible 98 plays nothing like a light, stiff, head-heavy 105. RacketFit turns how you play into the numbers you should be shopping for.</p>
-        <h3>1. Your answers become a target spec</h3>
-        <p>Each survey answer nudges a baseline up or down. A beginner gets a bigger head and lighter weight; an arm-sensitive player gets a lower stiffness, weighted more heavily. Nothing is hidden, every adjustment is a small, readable number.</p>
-        <h3>2. Every racket is scored</h3>
-        <p>For each spec, a racket scores 1.0 at your ideal and fades toward 0 as it drifts outside your comfortable range. String pattern is matched separately. Weighted together, that becomes a 0 to 100 match.</p>
-        <h3>3. String, tension, and grip</h3>
-        <p>Strings are scored on power, control, spin, comfort, durability, and feel against what your game needs. Tension is tuned inside the string's normal range: lower for power and comfort, higher for control. Grip size comes from your hand measurement, snapped to a standard size.</p>
-        <h3>The cheat sheet</h3>
+        <p data-i18n="guide.p1">Picking a racket by brand is a trap...</p>
+        <h3 data-i18n="guide.h1">1. Your answers become a target spec</h3>
+        <p data-i18n="guide.p2">Each survey answer nudges a baseline up or down...</p>
+        <h3 data-i18n="guide.h2">2. Every racket is scored</h3>
+        <p data-i18n="guide.p3">For each spec, a racket scores 1.0 at your ideal...</p>
+        <h3 data-i18n="guide.h3">3. String, tension, and grip</h3>
+        <p data-i18n="guide.p4">Strings are scored on power, control, spin, comfort...</p>
+        <h3 data-i18n="guide.h4">The cheat sheet</h3>
         <ul class="guide-list">
-          <li><strong>Bigger head</strong> = more power and forgiveness. <strong>Smaller</strong> = more control.</li>
-          <li><strong>Heavier</strong> = more stability and plow-through, harder to swing fast.</li>
-          <li><strong>Head-light</strong> = maneuverable. <strong>Head-heavy</strong> = more mass behind the ball.</li>
-          <li><strong>Lower RA (stiffness)</strong> = more flex and comfort. <strong>Higher</strong> = more power, harsher.</li>
-          <li><strong>Open pattern (16x19)</strong> = more spin. <strong>Dense (18x20)</strong> = more control.</li>
-          <li><strong>Lower tension</strong> = more power. <strong>Higher tension</strong> = more control.</li>
+          <li data-i18n-html="guide.c1"></li>
+          <li data-i18n-html="guide.c2"></li>
+          <li data-i18n-html="guide.c3"></li>
+          <li data-i18n-html="guide.c4"></li>
+          <li data-i18n-html="guide.c5"></li>
+          <li data-i18n-html="guide.c6"></li>
         </ul>
-        <a href="#quiz" data-nav class="btn btn-primary btn-lg">Take the quiz →</a>
+        <a href="/quiz" data-nav data-view="quiz" class="btn btn-primary btn-lg" data-i18n="guide.cta">Take the quiz →</a>
       </div>
     </div>
   </section>
@@ -291,31 +321,37 @@
   <footer class="site-footer-lg">
     <div class="wrap footer-grid">
       <div class="footer-brand">
-        <span class="nav-ball">🎾</span><span>Racket<strong>Fit</strong></span>
-        <p>The open-source tennis gear advisor. Specs are approximate, always demo before you buy.</p>
+        <span class="logo-cube logo-cube--dark" aria-hidden="true">
+          <span class="lc-face lc-front"></span><span class="lc-face lc-back"></span>
+          <span class="lc-face lc-right"></span><span class="lc-face lc-left"></span>
+          <span class="lc-face lc-top"></span><span class="lc-face lc-bottom"></span>
+        </span>
+        <span>Racket<strong>Fit</strong></span>
+        <p data-i18n="footer.tagline">The open-source tennis gear advisor. Specs are approximate, always demo before you buy.</p>
       </div>
       <div class="footer-col">
-        <h4>Quiz</h4>
-        <a href="#quiz" data-nav>Take the quiz</a>
-        <a href="#guide" data-nav>How it works</a>
+        <h4 data-i18n="footer.quiz">Quiz</h4>
+        <a href="/quiz" data-nav data-view="quiz" data-i18n="footer.takequiz">Take the quiz</a>
+        <a href="/guide" data-nav data-view="guide" data-i18n="footer.howitworks">How it works</a>
       </div>
       <div class="footer-col">
-        <h4>Browse</h4>
-        <a href="#rackets" data-nav>All rackets</a>
-        <a href="#strings" data-nav>All strings</a>
+        <h4 data-i18n="footer.browse">Browse</h4>
+        <a href="/rackets" data-nav data-view="rackets" data-i18n="footer.allrackets">All rackets</a>
+        <a href="/strings" data-nav data-view="strings" data-i18n="footer.allstrings">All strings</a>
       </div>
       <div class="footer-col">
-        <h4>Project</h4>
-        <a href="https://github.com/tylrcc/racketfit" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/tylrcc/racketfit/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+        <h4 data-i18n="footer.project">Project</h4>
+        <a href="https://github.com/tylrcc/racketfit" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a>
+        <a href="https://github.com/tylrcc/racketfit/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">MIT License</a>
       </div>
     </div>
     <div class="wrap footer-base">
-      <span>Built by tylrcc. Open source under the MIT License.</span>
+      <span data-i18n="footer.built">Built by tylrcc. Open source under the MIT License.</span>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
+  <script src="/i18n.js" defer></script>
   <script src="/ball.js" defer></script>
   <script src="/engine.js" defer></script>
   <script src="/app.js" defer></script>

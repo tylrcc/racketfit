@@ -221,6 +221,84 @@ R = [
     ("Solinco", "Whiteout 98 16x19 2022", 2022, 98, 322, 7, 326, 64, 21, "16x19", "Control / Spin", 219),
     ("Solinco", "Whiteout 305 2022", 2022, 98, 322, 7, 328, 64, 22, "16x19", "Control / Spin", 219),
     ("Solinco", "Blackout 300 2021", 2021, 100, 318, 4, 320, 66, 23, "16x19", "Spin / Power", 199),
+
+    # ================================================================
+    # Classic era, 2005-2015. Approximate strung specs for the era's
+    # most widely played frames. Older MSRPs reflect their launch price.
+    # ================================================================
+    # ---------------- Babolat (2005-2015) ----------------
+    ("Babolat", "Pure Drive 2005", 2005, 100, 318, 4, 320, 72, 23, "16x19", "Power", 180),
+    ("Babolat", "Pure Drive 2009", 2009, 100, 318, 4, 320, 72, 23, "16x19", "Power", 189),
+    ("Babolat", "Pure Drive 2012", 2012, 100, 318, 4, 320, 72, 23, "16x19", "Power", 199),
+    ("Babolat", "Pure Drive 2015", 2015, 100, 318, 4, 320, 72, 23, "16x19", "Power", 199),
+    ("Babolat", "Pure Drive Roddick 2010", 2010, 100, 332, 2, 332, 72, 23, "16x19", "Power", 199),
+    ("Babolat", "AeroPro Drive 2007", 2007, 100, 318, 4, 322, 67, 23, "16x19", "Power / Spin", 189),
+    ("Babolat", "AeroPro Drive 2010", 2010, 100, 318, 4, 322, 67, 23, "16x19", "Power / Spin", 189),
+    ("Babolat", "AeroPro Drive GT 2013", 2013, 100, 318, 4, 324, 67, 23, "16x19", "Power / Spin", 199),
+    ("Babolat", "Pure Storm 2008", 2008, 98, 320, 4, 320, 66, 22, "16x19", "Control", 189),
+    ("Babolat", "Pure Storm GT 2011", 2011, 98, 320, 4, 320, 67, 22, "16x19", "Control", 199),
+    ("Babolat", "Aero Storm Tour 2010", 2010, 98, 320, 4, 322, 68, 22, "16x19", "Control / Spin", 199),
+    ("Babolat", "Pure Control 95 2014", 2014, 95, 330, 8, 322, 64, 21, "18x20", "Control", 199),
+
+    # ---------------- Wilson (2005-2015) ----------------
+    ("Wilson", "nCode n6.1 95", 2005, 95, 345, 8, 325, 65, 18, "18x20", "Control", 179),
+    ("Wilson", "nCode nBlade 98", 2006, 98, 325, 7, 322, 64, 21, "18x20", "Control", 169),
+    ("Wilson", "[K]Six.One 95", 2007, 95, 349, 8, 328, 66, 21, "16x18", "Control", 189),
+    ("Wilson", "BLX Six.One 95", 2010, 95, 349, 8, 330, 67, 21, "16x18", "Control", 199),
+    ("Wilson", "Pro Staff Six.One 95 2014", 2014, 95, 349, 8, 330, 67, 21, "16x18", "Control", 199),
+    ("Wilson", "Pro Staff Six.One 90 2012", 2012, 90, 364, 9, 332, 67, 17, "16x19", "Control", 199),
+    ("Wilson", "Blade 98 BLX 2013", 2013, 98, 326, 7, 327, 65, 21, "18x20", "Control", 189),
+    ("Wilson", "Blade 98 2015", 2015, 98, 326, 7, 328, 62, 21, "16x19", "Control", 199),
+    ("Wilson", "Juice 100 BLX 2013", 2013, 100, 318, 4, 320, 70, 23, "16x19", "Power", 189),
+    ("Wilson", "Steam 99 2013", 2013, 99, 332, 6, 325, 70, 22, "18x20", "Control / Power", 189),
+    ("Wilson", "Steam 99S 2013", 2013, 99, 332, 6, 322, 71, 22, "16x15", "Spin", 199),
+    ("Wilson", "Pro Open BLX 2011", 2011, 100, 309, 3, 325, 71, 25, "16x19", "Power / Spin", 179),
+
+    # ---------------- Head (2005-2015) ----------------
+    ("Head", "Liquidmetal Radical 2005", 2005, 102, 320, 4, 325, 66, 23, "16x19", "All-Court", 179),
+    ("Head", "Flexpoint Radical 2006", 2006, 98, 320, 5, 322, 65, 22, "16x19", "All-Court", 179),
+    ("Head", "MicroGel Radical MP 2008", 2008, 98, 320, 5, 322, 64, 22, "16x19", "All-Court", 179),
+    ("Head", "YouTek Radical Pro 2010", 2010, 98, 339, 8, 330, 64, 22, "16x19", "Control", 189),
+    ("Head", "YouTek IG Radical Pro 2012", 2012, 98, 339, 8, 330, 64, 22, "16x19", "Control", 199),
+    ("Head", "Graphene Radical Pro 2014", 2014, 98, 332, 8, 330, 64, 22, "16x19", "Control", 199),
+    ("Head", "Liquidmetal Prestige MP 2005", 2005, 98, 344, 8, 330, 63, 20, "18x20", "Control", 189),
+    ("Head", "YouTek Prestige MP 2010", 2010, 98, 335, 8, 330, 62, 21, "18x20", "Control", 199),
+    ("Head", "YouTek IG Prestige MP 2012", 2012, 98, 335, 8, 330, 62, 20, "18x20", "Control", 199),
+    ("Head", "Graphene Prestige MP 2014", 2014, 98, 335, 8, 330, 61, 21, "18x20", "Control", 199),
+    ("Head", "YouTek Speed Pro 2010", 2010, 100, 339, 8, 330, 63, 23, "18x20", "Control / All-Court", 199),
+    ("Head", "Graphene Speed Pro 2013", 2013, 100, 340, 8, 332, 64, 23, "18x20", "Control / All-Court", 219),
+    ("Head", "Graphene Speed MP 2013", 2013, 100, 315, 5, 320, 62, 23, "16x19", "All-Court", 199),
+    ("Head", "Graphene XT Speed MP 2015", 2015, 100, 315, 5, 320, 62, 23, "16x19", "All-Court", 219),
+    ("Head", "YouTek IG Extreme MP 2012", 2012, 100, 315, 4, 320, 66, 24, "16x19", "Spin", 189),
+
+    # ---------------- Yonex (2005-2015) ----------------
+    ("Yonex", "RDS 001 MP 2007", 2007, 98, 320, 5, 320, 66, 22, "16x19", "Control", 179),
+    ("Yonex", "RDiS 100 MP 2009", 2009, 98, 325, 5, 322, 65, 22, "16x19", "Control", 189),
+    ("Yonex", "VCORE 98D 2012", 2012, 98, 325, 5, 322, 64, 22, "18x20", "Control", 199),
+    ("Yonex", "VCORE Tour G 97 2015", 2015, 97, 330, 8, 322, 62, 21, "16x19", "Control", 199),
+    ("Yonex", "EZONE Ai 98 2014", 2014, 98, 320, 5, 318, 65, 23, "16x19", "All-Court", 199),
+    ("Yonex", "EZONE Ai 100 2014", 2014, 100, 314, 3, 318, 69, 24, "16x19", "Power", 199),
+
+    # ---------------- Prince (2005-2015) ----------------
+    ("Prince", "O3 White 2006", 2006, 100, 320, 4, 320, 67, 24, "16x19", "Power", 179),
+    ("Prince", "O3 Speedport Black 2008", 2008, 100, 320, 4, 322, 66, 24, "16x18", "Power / Spin", 179),
+    ("Prince", "EXO3 Tour 100 2009", 2009, 100, 320, 6, 320, 63, 22, "16x18", "Control", 179),
+    ("Prince", "EXO3 Rebel 95 2010", 2010, 95, 339, 8, 322, 60, 20, "14x18", "Control", 189),
+    ("Prince", "Tour 98 ESP 2012", 2012, 98, 320, 6, 320, 65, 22, "16x18", "Control / Spin", 179),
+
+    # ---------------- Dunlop (2005-2015) ----------------
+    ("Dunlop", "Aerogel 4D 300 2009", 2009, 98, 320, 4, 320, 66, 22, "16x19", "Control / Power", 159),
+    ("Dunlop", "Aerogel 4D 200 2009", 2009, 95, 339, 8, 325, 64, 20, "18x20", "Control", 169),
+    ("Dunlop", "Biomimetic 300 2011", 2011, 98, 320, 4, 320, 66, 22, "16x19", "Control / Power", 159),
+    ("Dunlop", "Biomimetic F3.0 Tour 2013", 2013, 98, 320, 5, 320, 66, 22, "16x19", "All-Court", 169),
+    ("Dunlop", "Srixon Revo CX 2.0 Tour 2015", 2015, 98, 320, 7, 322, 64, 21, "16x19", "Control", 179),
+
+    # ---------------- Volkl & Tecnifibre (2005-2015) ----------------
+    ("Volkl", "DNX 9 2006", 2006, 100, 320, 5, 320, 64, 22, "16x19", "All-Court", 179),
+    ("Volkl", "Powerbridge 10 Mid 2009", 2009, 93, 335, 7, 320, 62, 19, "16x19", "Control", 189),
+    ("Volkl", "Organix 10 325g 2012", 2012, 98, 343, 6, 328, 60, 21, "18x20", "Control / Comfort", 199),
+    ("Tecnifibre", "TFight 320 2010", 2010, 98, 339, 6, 328, 66, 22, "16x19", "Control", 189),
+    ("Tecnifibre", "TFight 315 Ltd 2013", 2013, 98, 333, 7, 326, 65, 22, "18x20", "Control", 199),
 ]
 
 
@@ -253,7 +331,7 @@ def main() -> None:
     rackets = build_rackets()
     payload = {
         "_meta": {
-            "note": "Comprehensive coverage of major brands' main racket lines, 2016-2026. "
+            "note": "Comprehensive coverage of major brands' main racket lines, 2005-2026. "
                     "Specs are approximate strung manufacturer values, consistent within each "
                     "line and rounded for comparison. Build a shortlist, then demo before buying. "
                     "Some specs for very recent 2026 frames are projected.",
