@@ -25,6 +25,9 @@ h1, h2, h3, h4, .hero-title, .band-title, .nav-brand, .match-name, .kit-value,
 .setup-text, .footer-brand { font-family: var(--font-heading); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+/* The hidden attribute must always win, even over display:grid/flex rules
+   (otherwise the gallery/table toggle and view switching don't hide). */
+[hidden] { display: none !important; }
 
 body {
   font-family: var(--font);
