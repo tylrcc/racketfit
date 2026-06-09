@@ -1093,7 +1093,8 @@
       "price_usd": 20,
       "best_for": "A balanced co-poly all-rounder with a soft, connected feel.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1716594855581-LBC9P230LEJ1DC5XLS12/DSCF0183.JPG?format=500w"
     },
     {
       "id": "grapplesnake-tour-sniper",
@@ -1114,7 +1115,8 @@
       "price_usd": 20,
       "best_for": "A firm control poly for players who supply their own pace.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1716594916871-0XD6QKAWLVRYANXQJBED/DSCF0182.JPG?format=500w"
     },
     {
       "id": "grapplesnake-game-changer",
@@ -1135,7 +1137,8 @@
       "price_usd": 20,
       "best_for": "A shaped profile built for heavy, aggressive topspin.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1716595024405-WH3RWP0LP3SVLD2KQ8P4/DSCF0184.JPG?format=500w"
     },
     {
       "id": "grapplesnake-alpha",
@@ -1156,7 +1159,8 @@
       "price_usd": 20,
       "best_for": "A softer, arm-friendly poly that keeps a comfortable feel.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1716594986513-0PNY4XY7FDH84HH34789/DSCF0181.JPG?format=500w"
     },
     {
       "id": "grapplesnake-tour-mako",
@@ -1177,7 +1181,8 @@
       "price_usd": 22,
       "best_for": "A control-first tour poly with a precise, predictable response.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/e075f401-179c-4f88-b327-10569ccbb482/DSCF1152.jpg?format=500w"
     },
     {
       "id": "grapplesnake-soldier",
@@ -1198,7 +1203,8 @@
       "price_usd": 22,
       "best_for": "Holds tension well with strong spin and durability.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/6f64a5aa-51a6-4244-86ad-647e48a77b0f/DSC02306.JPG?format=500w"
     },
     {
       "id": "restring-sync",
@@ -1219,7 +1225,8 @@
       "price_usd": 20,
       "best_for": "A well-rounded, durable co-poly with steady tension upkeep.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/686b3f8d-5df7-4ff6-969a-0618298b7368/DSC00039.jpg?format=500w"
     },
     {
       "id": "restring-zero",
@@ -1240,7 +1247,8 @@
       "price_usd": 20,
       "best_for": "Low tension loss with a spin-and-control bias.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/6acf73a1-34a1-41a0-9e7c-ef4f5fd3504c/DSC00043.jpg?format=500w"
     },
     {
       "id": "restring-slap",
@@ -1261,7 +1269,8 @@
       "price_usd": 20,
       "best_for": "An aggressively shaped poly for maximum bite.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/c7a40228-f497-4402-a803-1570941ec885/DSC02252.JPG?format=500w"
     },
     {
       "id": "restring-vivo",
@@ -1282,7 +1291,8 @@
       "price_usd": 20,
       "best_for": "A more comfortable, forgiving co-poly for all-court play.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/e0bb3a84-fc3b-46f8-b1c3-edaf478031ef/DSC00047.png?format=500w"
     },
     {
       "id": "toroline-a5",
@@ -1303,7 +1313,8 @@
       "price_usd": 12,
       "best_for": "A high-value spin-and-control poly.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/dfc0d9e7-5642-46ea-b55f-d32d182bc026/DSC02387.JPG?format=500w"
     },
     {
       "id": "toroline-o-snap",
@@ -1324,7 +1335,8 @@
       "price_usd": 13,
       "best_for": "A snappy shaped poly geared toward spin.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/5c568283-2cd4-470c-a7b0-f7464daa360f/DSC02289.JPG?format=500w"
     },
     {
       "id": "toroline-o-toro",
@@ -1345,7 +1357,8 @@
       "price_usd": 13,
       "best_for": "A round control poly with a clean response.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/15dbb7e6-8716-487f-8dbc-0e9fe7ab474c/DSC00144.jpg?format=500w"
     },
     {
       "id": "toroline-o-toro-tour",
@@ -1366,7 +1379,8 @@
       "price_usd": 14,
       "best_for": "A firmer, durable control option for big hitters.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/3e5b60ba-74e8-4dcc-8e82-c28af6909adc/DSC00141.jpg?format=500w"
     },
     {
       "id": "toroline-truffle-x",
@@ -1387,7 +1401,8 @@
       "price_usd": 14,
       "best_for": "A shaped poly balancing spin with a softer feel.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/eefd7fc1-56ee-4fb1-a4fa-e42061dfee1c/DSC02242.JPG?format=500w"
     },
     {
       "id": "toroline-caviar",
@@ -1408,7 +1423,8 @@
       "price_usd": 16,
       "best_for": "A premium-feeling poly with added comfort and control.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/bf111df8-2801-4443-be4e-e334bb0eeac0/DSC00140.jpg?format=500w"
     },
     {
       "id": "solinco-hyper-mach-bd",
@@ -1429,7 +1445,8 @@
       "price_usd": 18,
       "best_for": "A modern Solinco poly blending spin and control.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/6a8e99b8-0095-4f35-8304-66e43699e859/DSC02344.JPG?format=500w"
     },
     {
       "id": "solinco-confidential-soft",
@@ -1450,7 +1467,8 @@
       "price_usd": 18,
       "best_for": "A softened take on Confidential for more comfort.",
       "tier": "B",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/704a7f40-e467-4d93-b124-222661754932/DSC02350.JPG?format=500w"
     },
     {
       "id": "solinco-tour-bite-diamond-rough",
@@ -1471,7 +1489,8 @@
       "price_usd": 18,
       "best_for": "A textured Tour Bite for maximum spin and bite.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1719356792523-0K1VJ5UQESDDZRP5U88P/DSCF0689.JPG?format=500w"
     },
     {
       "id": "solinco-tour-bite-soft",
@@ -1492,7 +1511,8 @@
       "price_usd": 18,
       "best_for": "A more comfortable Tour Bite with strong spin.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1719352379011-DDLQ252SZYUGEFVYK724/DSCF0687.JPG?format=500w"
     },
     {
       "id": "solinco-hyper-g-round",
@@ -1513,7 +1533,8 @@
       "price_usd": 16,
       "best_for": "The round version of Hyper-G, smoother and durable.",
       "tier": "A",
-      "in_stock": true
+      "in_stock": true,
+      "image": "https://images.squarespace-cdn.com/content/v1/60ba839422f1d02a01cd5146/1719353987403-E2SGUIOGRLMTG9LVOIP4/DSCF0694.JPG?format=500w"
     },
     {
       "id": "tru-pro-pure-rush",
