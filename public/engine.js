@@ -289,6 +289,11 @@
     return w;
   }
 
+  // Overall quality tier (S best) -> a small multiplier so better-regarded
+  // strings rise among otherwise-similar options.
+  const TIER_VAL = { S: 1.0, A: 0.85, B: 0.7, C: 0.5, D: 0.35 };
+  function tierMult(s) { return 0.82 + 0.18 * (TIER_VAL[s.tier] != null ? TIER_VAL[s.tier] : 0.7); }
+
   function scoreString(s, weights, p) {
     const totalW = ATTRS.reduce((a, k) => a + weights[k], 0) || 1;
     let score = (ATTRS.reduce((a, k) => a + s[k] * weights[k], 0) / (totalW * 10)) * 100;
@@ -301,11 +306,14 @@
       if (s.type === "Polyester") score *= 1.08;
       else if (["Natural Gut", "Multifilament"].includes(s.type)) score *= 0.9;
     }
+    score *= tierMult(s);
     return Math.min(score, 100);
   }
 
   function stringReasons(s, p) {
     const r = [];
+    if (s.tier === "S") r.push("Tier S string: a benchmark in its class.");
+    else if (s.tier === "A") r.push("Tier A string: one of the top performers.");
     if (p.arm_sensitive && s.arm_friendly) r.push(`Arm-friendly ${s.type.toLowerCase()} (comfort ${s.comfort}/10) to protect your arm.`);
     if (p.spin_priority === "high" && s.spin >= 8) r.push(`High spin rating (${s.spin}/10)${s.shape !== "round" ? " from its shaped profile" : ""}.`);
     if (p.power_source === "needs_power" && s.power >= 7) r.push(`Adds free power and depth (power ${s.power}/10).`);
@@ -313,6 +321,27 @@
     if (p.skill_level === "beginner" && ["Multifilament", "Synthetic Gut"].includes(s.type)) r.push("Soft, forgiving, and easy on developing technique.");
     if (r.length === 0 && s.best_for) r.push(s.best_for);
     return r.slice(0, 3);
+  }
+
+  // ---- Customization tips (lead tape + swingweight), general tennis physics --
+  function customizationTips(profile, ideal) {
+    const sw = Math.round(ideal.targets.swingweight.ideal);
+    const tips = [];
+    tips.push(`Aim for a swingweight near ${sw}. Add small amounts of lead tape at 12 o'clock until a full match tires you, then back off a touch.`);
+    if (profile.maneuverability_priority === "low" || profile.weight_pref === "heavy" || profile.play_style === "aggressive_baseliner") {
+      tips.push("Stability: 1 g of lead at 3 and 9 o'clock (2 g total) raises twistweight for a steadier, more forgiving sweet spot on off-center hits.");
+    }
+    if (profile.power_source === "needs_power" || profile.head_pref === "large") {
+      tips.push("Power: 1-2 g at 12 o'clock adds free depth and pop (it also raises swingweight, so add gradually).");
+    }
+    if (profile.power_source === "generates_own_power" || profile.control_priority === "high") {
+      tips.push("Balanced add: 1 g at 10 and 2 o'clock blends extra plow-through with control.");
+    }
+    if (profile.arm_sensitive) {
+      tips.push("Comfort: add 5-10 g in the handle. It boosts stability and shifts balance toward your hand without raising swingweight or harshness.");
+    }
+    tips.push("Grip feel: a leather replacement grip firms up the feel and shifts balance toward the handle; an overgrip adds tack and a few grams.");
+    return { target_swingweight: sw, tips: tips.slice(0, 4) };
   }
 
   function recommendStrings(profile, strings, topN) {
@@ -380,6 +409,7 @@
     return {
       profile, ideal, recommendations: recs, strings,
       string: strings.length ? strings[0] : null, tension, grip, summary,
+      customization: customizationTips(profile, ideal),
       disclaimer: "Specs and ratings are approximate and meant to build a shortlist. Strings, grip, and your own swing change everything. Demo before you buy.",
     };
   }

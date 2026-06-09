@@ -498,3 +498,26 @@ body { background: var(--paper); }
   .match { grid-template-columns: 54px 1fr; gap: 12px; }
   .match-media { width: 54px; }
 }
+
+/* ---------- string tier badges ---------- */
+.tier-badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px;
+  padding: 0 5px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #fff;
+  vertical-align: middle; margin-left: 4px; font-family: var(--font); }
+.tier-S { background: #16a34a; }
+.tier-A { background: #3b5998; }
+.tier-B { background: #64748b; }
+.tier-C { background: #94a3b8; }
+.tier-D { background: #b45309; }
+
+/* ---------- customization tips card (results) ---------- */
+.custom-card { margin-top: 16px; border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px; background: #fff; box-shadow: var(--shadow); }
+.custom-card:empty { display: none; }
+.custom-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.custom-sw { font-size: 18px; font-weight: 800; color: var(--court); letter-spacing: -.02em; }
+.custom-tips { display: grid; gap: 8px; }
+.custom-tips li { list-style: none; font-size: 14px; color: var(--ink); padding-left: 18px; position: relative; }
+.custom-tips li::before { content: "\203A"; position: absolute; left: 2px; color: var(--court); font-weight: 800; }
+.custom-link { display: inline-block; margin-top: 14px; color: var(--court); font-weight: 700;
+  text-decoration: none; font-size: 14px; }
+.custom-link:hover { text-decoration: underline; }

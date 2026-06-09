@@ -12,6 +12,7 @@
     return n;
   };
   const t = (k, v) => (window.I18N ? window.I18N.t(k, v) : k);
+  const tierBadge = (it) => (it && it.tier ? `<span class="tier-badge tier-${it.tier}" title="Tier ${it.tier}">${it.tier}</span>` : "");
 
   const VIEWS = ["home", "quiz", "loading", "results", "rackets", "strings", "guide"];
   const HASH_VIEWS = ["home", "quiz", "rackets", "strings", "guide"];
@@ -303,7 +304,7 @@
         `<span class="match-rank">${i === 0 ? t("results.toppick") : "#" + (i + 1)}</span>` +
         `<div class="match-media">${mediaFor(s, "string")}</div>` +
         `<div class="match-body">` +
-        `<div class="match-top"><span class="match-name">${s.brand} ${s.model}</span>` +
+        `<div class="match-top"><span class="match-name">${s.brand} ${s.model} ${tierBadge(s)}</span>` +
         `<span class="match-cat">${s.type} · ${s.gauge} mm ${price}</span></div>` +
         `<div class="score-row"><div class="score-track"><div class="score-bar"></div></div><span class="score-pct">${srec.score}%</span></div>` +
         `<div class="spec-line">Spin ${s.spin} · Control ${s.control} · Power ${s.power} · Comfort ${s.comfort} ${arm}</div>` +
@@ -317,6 +318,14 @@
       `<div class="kit-icon">🎯</div><div class="kit-label">${t("kit.tension")}</div><div class="kit-value">${tn.ideal} lbs</div>` +
       `<div class="kit-sub">${t("kit.tensionrange", { lo: tn.lo, hi: tn.hi })}</div>` +
       `<ul class="kit-notes">${tn.notes.map((n) => `<li>${n}</li>`).join("")}</ul>`;
+
+    const cz = data.customization;
+    const cc = $("#customCard");
+    if (cz && cc) cc.innerHTML =
+      `<div class="custom-head"><span class="kit-icon">🛠️</span><div><div class="kit-label">${t("custom.title")}</div>` +
+      `<div class="custom-sw">${t("custom.target")} <strong>${cz.target_swingweight}</strong></div></div></div>` +
+      `<ul class="custom-tips">${cz.tips.map((x) => `<li>${x}</li>`).join("")}</ul>` +
+      `<a href="/guide" data-nav data-view="guide" class="custom-link">${t("custom.more")} →</a>`;
 
     const g = data.grip;
     $("#gripCard").innerHTML =
@@ -404,7 +413,7 @@
       strings.forEach((s) => {
         const tr = el("tr");
         const arm = s.arm_friendly ? `<span class="pill pill-soft">✓</span>` : `<span class="muted-count">–</span>`;
-        tr.innerHTML = `<td>${s.brand} ${s.model}</td><td>${s.type}</td><td>${s.gauge} mm</td><td>${s.spin}</td>` +
+        tr.innerHTML = `<td>${tierBadge(s)} ${s.brand} ${s.model}</td><td>${s.type}</td><td>${s.gauge} mm</td><td>${s.spin}</td>` +
           `<td>${s.control}</td><td>${s.power}</td><td>${s.comfort}</td><td>${arm}</td><td>${s.price_usd ? "$" + s.price_usd : ""}</td>`;
         tb.appendChild(tr);
       });
@@ -414,7 +423,7 @@
       strings.forEach((s) => {
         const card = el("div", "gcard");
         card.innerHTML = `<div class="gcard-media gcard-media--string">${mediaFor(s, "string")}</div>` +
-          `<div class="gcard-name">${s.brand} ${s.model}</div>` +
+          `<div class="gcard-name">${s.brand} ${s.model} ${tierBadge(s)}</div>` +
           `<div class="gcard-meta">${s.type} · ${s.gauge} mm</div>` +
           `<div class="gcard-spec">Spin ${s.spin} · Control ${s.control} · Power ${s.power} · Comfort ${s.comfort}</div>`;
         grid.appendChild(card);
