@@ -158,14 +158,17 @@
         court.rotation.y += vY + 0.0032;
         vY += (0.0035 - vY) * 0.02;
       }
-      // ball rallies across the court with realistic bounces
-      const x = Math.sin(T * 0.62) * 2.9;
-      const z = Math.cos(T * 0.62) * 0.85;
-      const h = Math.abs(Math.sin(T * 1.85)) * 1.25;
-      ball.position.set(x, 0.14 + h, z);
-      ball.rotation.x += 0.08; ball.rotation.z += 0.05;
+      // ball rallies baseline to baseline, arcing OVER the net (peak height at
+      // the net line x=0, touching down near each baseline) — like two players.
+      const A = 2.7;                              // baseline reach along the court
+      const x = Math.sin(T * 0.7) * A;
+      const z = Math.cos(T * 0.7) * 0.7;
+      const nx = x / A;                           // -1 baseline .. 0 net .. 1 baseline
+      const hgt = 1.18 * (1 - nx * nx);           // parabolic arc: high at the net, ~0 at baselines
+      ball.position.set(x, 0.14 + hgt, z);
+      ball.rotation.x += 0.09; ball.rotation.z += 0.05;
       shadow.position.set(x, 0.011, z);
-      const sc = 1 - h * 0.4;
+      const sc = 1 - hgt * 0.45;
       shadow.scale.set(sc, sc, sc);
       shadow.material.opacity = 0.30 * sc;
       renderer.render(scene, camera);
