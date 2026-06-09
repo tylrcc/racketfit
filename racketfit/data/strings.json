@@ -27,7 +27,8 @@
       "tension_hi": 54,
       "price_usd": 20,
       "best_for": "The tour-standard control poly. Crisp, precise, low-powered.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/03959_ihgbab.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/03959_ihgbab.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-alu-power-soft",
@@ -47,7 +48,8 @@
       "tension_hi": 52,
       "price_usd": 20,
       "best_for": "ALU Power's crisp response with noticeably more comfort.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/03959_ihgbab.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/03959_ihgbab.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-alu-power-rough",
@@ -67,7 +69,8 @@
       "tension_hi": 54,
       "price_usd": 20,
       "best_for": "Textured ALU Power for extra spin grip.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02600_csvbiw.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02600_csvbiw.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-4g",
@@ -87,7 +90,8 @@
       "tension_hi": 54,
       "price_usd": 20,
       "best_for": "Best-in-class tension maintenance. Firm and durable for string breakers.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/08262_yihsjq.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/08262_yihsjq.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-savage",
@@ -107,7 +111,8 @@
       "tension_hi": 54,
       "price_usd": 18,
       "best_for": "Softer, spin-friendly Luxilon poly with a livelier feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/01390_mowgit.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/01390_mowgit.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-element",
@@ -127,7 +132,8 @@
       "tension_hi": 56,
       "price_usd": 20,
       "best_for": "Soft, warm, arm-friendly poly. Comfort without going to multifilament.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/01195_nnbvxu.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/01195_nnbvxu.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-adrenaline",
@@ -146,7 +152,8 @@
       "tension_lo": 48,
       "tension_hi": 54,
       "price_usd": 18,
-      "best_for": "Comfort-oriented control poly with good all-around manners."
+      "best_for": "Comfort-oriented control poly with good all-around manners.",
+      "in_stock": false
     },
     {
       "id": "babolat-rpm-blast",
@@ -166,7 +173,8 @@
       "tension_hi": 54,
       "price_usd": 18,
       "best_for": "Heavy spin and durability. Nadal's string. Firm feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/00850_rbwmqk.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/00850_rbwmqk.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "babolat-rpm-power",
@@ -186,7 +194,8 @@
       "tension_hi": 54,
       "price_usd": 18,
       "best_for": "RPM spin with a softer, more powerful and arm-friendly feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02856_ilycks.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02856_ilycks.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "babolat-rpm-soft",
@@ -206,7 +215,8 @@
       "tension_hi": 52,
       "price_usd": 18,
       "best_for": "The most comfortable RPM. Spin and feel with low stiffness.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/03551_hybyiy.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/03551_hybyiy.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "babolat-rpm-rough",
@@ -226,7 +236,8 @@
       "tension_hi": 54,
       "price_usd": 18,
       "best_for": "Textured RPM Blast for even more spin bite.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/05196_uewmvs.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/05196_uewmvs.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "babolat-pro-hurricane-tour",
@@ -245,7 +256,8 @@
       "tension_lo": 50,
       "tension_hi": 56,
       "price_usd": 15,
-      "best_for": "Classic firm control-and-spin poly. A great hybrid main."
+      "best_for": "Classic firm control-and-spin poly. A great hybrid main.",
+      "in_stock": false
     },
     {
       "id": "solinco-hyper-g",
@@ -265,7 +277,8 @@
       "tension_hi": 54,
       "price_usd": 14,
       "best_for": "Huge spin and control at a great price. A modern favorite.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/03928_rdcdnn.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/03928_rdcdnn.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "solinco-hyper-g-soft",
@@ -285,7 +298,8 @@
       "tension_hi": 52,
       "price_usd": 15,
       "best_for": "Hyper-G spin with a softer, more comfortable response.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02880_aircgv.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02880_aircgv.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "solinco-tour-bite",
@@ -305,7 +319,8 @@
       "tension_hi": 54,
       "price_usd": 14,
       "best_for": "Maximum bite and spin for full, fast swings. Very firm.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/03927_aftxdk.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/03927_aftxdk.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "solinco-confidential",
@@ -325,7 +340,8 @@
       "tension_hi": 54,
       "price_usd": 16,
       "best_for": "Premium comfort-and-control poly with a soft, muted feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02795_dvxxdk.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02795_dvxxdk.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "solinco-mach-10",
@@ -345,7 +361,8 @@
       "tension_hi": 52,
       "price_usd": 16,
       "best_for": "Plush, elastic co-poly. Spin and control with real comfort.",
-      "image": "https://cdn.tennisplaza.com/products/2025/12/26206_ircorg.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2025/12/26206_ircorg.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "head-lynx-tour",
@@ -365,7 +382,8 @@
       "tension_hi": 54,
       "price_usd": 15,
       "best_for": "Balanced control poly with good spin and a comfortable-for-poly feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/04066_mwtvpx.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/04066_mwtvpx.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "head-hawk-touch",
@@ -385,7 +403,8 @@
       "tension_hi": 54,
       "price_usd": 15,
       "best_for": "Soft, comfortable control poly. A gentle introduction to poly.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/01328_wsvfuc.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/01328_wsvfuc.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "head-sonic-pro",
@@ -404,7 +423,8 @@
       "tension_lo": 52,
       "tension_hi": 58,
       "price_usd": 10,
-      "best_for": "Affordable, durable, easy-playing poly. Good value full bed."
+      "best_for": "Affordable, durable, easy-playing poly. Good value full bed.",
+      "in_stock": false
     },
     {
       "id": "yonex-poly-tour-pro",
@@ -424,7 +444,8 @@
       "tension_hi": 55,
       "price_usd": 15,
       "best_for": "One of the more arm-friendly polys. Smooth, comfortable, controlled.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02706_jpkhmd.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02706_jpkhmd.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "yonex-poly-tour-spin",
@@ -444,7 +465,8 @@
       "tension_hi": 54,
       "price_usd": 15,
       "best_for": "Shaped Yonex poly built for spin and control.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/08169_mefeue.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/08169_mefeue.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "yonex-poly-tour-rev",
@@ -464,7 +486,8 @@
       "tension_hi": 54,
       "price_usd": 15,
       "best_for": "Snappy, spin-focused poly with a comfortable feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/06545_qmcrlk.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/06545_qmcrlk.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "tecnifibre-razor-code",
@@ -484,7 +507,8 @@
       "tension_hi": 54,
       "price_usd": 16,
       "best_for": "Crisp spin-and-control poly with a touch more pop than ALU.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/08875_xrblwr.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/08875_xrblwr.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "tecnifibre-razor-soft",
@@ -504,7 +528,8 @@
       "tension_hi": 52,
       "price_usd": 16,
       "best_for": "Razor Code's control with a soft, arm-friendly response.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/07803_fqsgxi.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/07803_fqsgxi.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "tecnifibre-black-code",
@@ -524,7 +549,8 @@
       "tension_hi": 54,
       "price_usd": 15,
       "best_for": "Shaped control poly with bite and a reasonably soft feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02661_kwgulh.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02661_kwgulh.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "volkl-cyclone",
@@ -544,7 +570,8 @@
       "tension_hi": 56,
       "price_usd": 10,
       "best_for": "Budget shaped poly with strong spin. Great first poly to try.",
-      "image": "https://cdn.tennisplaza.com/products/2025/05/18515_ujovdq.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2025/05/18515_ujovdq.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "volkl-cyclone-tour",
@@ -564,7 +591,8 @@
       "tension_hi": 56,
       "price_usd": 11,
       "best_for": "Firmer, more controlled version of Cyclone for stronger swings.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/08358_dxhejx.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/08358_dxhejx.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "msv-focus-hex",
@@ -583,7 +611,8 @@
       "tension_lo": 50,
       "tension_hi": 56,
       "price_usd": 9,
-      "best_for": "Hexagonal spin poly at an unbeatable price. Cult value pick."
+      "best_for": "Hexagonal spin poly at an unbeatable price. Cult value pick.",
+      "in_stock": false
     },
     {
       "id": "signum-pro-hyperion",
@@ -602,7 +631,8 @@
       "tension_lo": 48,
       "tension_hi": 54,
       "price_usd": 10,
-      "best_for": "Comfortable, controlled boutique poly with solid value."
+      "best_for": "Comfortable, controlled boutique poly with solid value.",
+      "in_stock": false
     },
     {
       "id": "toroline-wasabi",
@@ -621,7 +651,8 @@
       "tension_lo": 44,
       "tension_hi": 50,
       "price_usd": 11,
-      "best_for": "Very soft, lively co-poly meant to be strung low. Comfort and spin."
+      "best_for": "Very soft, lively co-poly meant to be strung low. Comfort and spin.",
+      "in_stock": false
     },
     {
       "id": "tecnifibre-x-one-biphase",
@@ -641,7 +672,8 @@
       "tension_hi": 60,
       "price_usd": 22,
       "best_for": "Premium soft multifilament. Plush power and shock absorption for sensitive arms.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02681_ftssjj.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02681_ftssjj.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "tecnifibre-nrg2",
@@ -661,7 +693,8 @@
       "tension_hi": 62,
       "price_usd": 20,
       "best_for": "Super soft, powerful multifilament for maximum comfort and feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02642_yerpbj.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02642_yerpbj.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "tecnifibre-hdx-tour",
@@ -680,7 +713,8 @@
       "tension_lo": 54,
       "tension_hi": 60,
       "price_usd": 18,
-      "best_for": "Multifilament comfort with more control than most. A natural-gut alternative."
+      "best_for": "Multifilament comfort with more control than most. A natural-gut alternative.",
+      "in_stock": false
     },
     {
       "id": "tecnifibre-triax",
@@ -700,7 +734,8 @@
       "tension_hi": 58,
       "price_usd": 20,
       "best_for": "Poly-like control with multifilament plushness. Ideal for transitioning off poly.",
-      "image": "https://cdn.tennisplaza.com/products/2024/03/06525_kkapkq.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/03/06525_kkapkq.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "wilson-nxt",
@@ -720,7 +755,8 @@
       "tension_hi": 60,
       "price_usd": 18,
       "best_for": "Classic comfortable multifilament. Soft, powerful, gentle on the arm.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/02158_epigub.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/02158_epigub.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "wilson-sensation",
@@ -740,7 +776,8 @@
       "tension_hi": 62,
       "price_usd": 14,
       "best_for": "Affordable all-around multifilament. Comfortable and easy to play.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/04218_lqgsqw.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/04218_lqgsqw.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "head-velocity-mlt",
@@ -760,7 +797,8 @@
       "tension_hi": 60,
       "price_usd": 14,
       "best_for": "Affordable, comfortable multifilament. A great value comfort string.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/01136_fwjxon.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/01136_fwjxon.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "head-rip-control",
@@ -780,7 +818,8 @@
       "tension_hi": 60,
       "price_usd": 16,
       "best_for": "The most control-oriented multifilament. Comfort with a firmer, precise feel.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/01916_ifikur.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/01916_ifikur.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "babolat-xcel",
@@ -800,7 +839,8 @@
       "tension_hi": 62,
       "price_usd": 18,
       "best_for": "Plush, powerful multifilament. One of the most comfortable strings made.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/00835_fauqqa.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/00835_fauqqa.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "babolat-addiction",
@@ -819,7 +859,8 @@
       "tension_lo": 55,
       "tension_hi": 62,
       "price_usd": 14,
-      "best_for": "Warm, soft multifilament with great touch at a fair price."
+      "best_for": "Warm, soft multifilament with great touch at a fair price.",
+      "in_stock": false
     },
     {
       "id": "prince-premier-touch",
@@ -838,7 +879,8 @@
       "tension_lo": 55,
       "tension_hi": 62,
       "price_usd": 18,
-      "best_for": "Ultra-soft multifilament designed to mimic natural gut comfort."
+      "best_for": "Ultra-soft multifilament designed to mimic natural gut comfort.",
+      "in_stock": false
     },
     {
       "id": "babolat-syntec-syngut",
@@ -857,7 +899,8 @@
       "tension_lo": 55,
       "tension_hi": 62,
       "price_usd": 8,
-      "best_for": "The all-around, low-cost default. Balanced and forgiving for casual or new players."
+      "best_for": "The all-around, low-cost default. Balanced and forgiving for casual or new players.",
+      "in_stock": false
     },
     {
       "id": "prince-synthetic-gut",
@@ -876,7 +919,8 @@
       "tension_lo": 55,
       "tension_hi": 62,
       "price_usd": 8,
-      "best_for": "Durable, dependable synthetic gut. A classic value all-arounder."
+      "best_for": "Durable, dependable synthetic gut. A classic value all-arounder.",
+      "in_stock": false
     },
     {
       "id": "wilson-synthetic-gut-power",
@@ -896,7 +940,8 @@
       "tension_hi": 62,
       "price_usd": 8,
       "best_for": "Inexpensive, lively synthetic gut. Great for beginners and rec players.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/00893_svxkso.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/00893_svxkso.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "gamma-synthetic-gut",
@@ -915,7 +960,8 @@
       "tension_lo": 55,
       "tension_hi": 62,
       "price_usd": 7,
-      "best_for": "Budget synthetic gut. Reliable and easy on the arm for casual play."
+      "best_for": "Budget synthetic gut. Reliable and easy on the arm for casual play.",
+      "in_stock": false
     },
     {
       "id": "babolat-vs-natural-gut",
@@ -934,7 +980,8 @@
       "tension_lo": 55,
       "tension_hi": 62,
       "price_usd": 42,
-      "best_for": "The gold standard for comfort and feel. Premium price, unmatched touch."
+      "best_for": "The gold standard for comfort and feel. Premium price, unmatched touch.",
+      "in_stock": false
     },
     {
       "id": "wilson-natural-gut",
@@ -954,7 +1001,8 @@
       "tension_hi": 62,
       "price_usd": 38,
       "best_for": "Premium natural gut power and comfort. Superb as a hybrid main or full bed.",
-      "image": "https://cdn.tennisplaza.com/products/2024/02/04787_oulccp.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/02/04787_oulccp.jpg?width=500",
+      "in_stock": true
     },
     {
       "id": "luxilon-natural-gut",
@@ -974,7 +1022,8 @@
       "tension_hi": 62,
       "price_usd": 40,
       "best_for": "Tour-grade natural gut, often paired with ALU Power in a hybrid.",
-      "image": "https://cdn.tennisplaza.com/products/2024/01/01364_syvimk.jpg?width=500"
+      "image": "https://cdn.tennisplaza.com/products/2024/01/01364_syvimk.jpg?width=500",
+      "in_stock": true
     }
   ]
 }

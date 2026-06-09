@@ -331,6 +331,11 @@ def build_rackets() -> list[dict]:
             "beam_mm": beam, "string_pattern": pat, "category": cat,
             "msrp_usd": msrp, "url": URLS.get(brand),
         }
+        # A racket is "in stock / buyable" when we have a live retail photo for
+        # it AND it is a current-era frame (older year-variants share a line's
+        # photo but are discontinued). Recommendations use only these; browse
+        # still shows the whole database.
+        entry["in_stock"] = (rid in images) and year >= 2022
         if rid in images:
             entry["image"] = images[rid]
         out.append(entry)

@@ -14,10 +14,17 @@
       { value: "all_court", label: "All-court", desc: "Comfortable everywhere, adapt to the point." },
       { value: "counterpuncher", label: "Counterpuncher", desc: "Defense, consistency, redirect pace." },
       { value: "serve_and_volley", label: "Serve & volley / net", desc: "Get forward and finish at the net." } ] },
+    { key: "backhand", title: "What is your backhand?", help: "One-handers usually want a more flexible, control-oriented, head-light frame.", type: "single", options: [
+      { value: "one", label: "One-handed", desc: "A classic one-handed backhand." },
+      { value: "two", label: "Two-handed", desc: "Two hands on the backhand side." } ] },
     { key: "swing_length", title: "How long is your swing?", help: "Compact, controlled cuts vs. long, full follow-throughs.", type: "single", options: [
       { value: "compact", label: "Compact", desc: "Short, quick swings. Blocks and punches." },
       { value: "moderate", label: "Moderate", desc: "A balanced, repeatable swing." },
       { value: "full", label: "Full", desc: "Long, fast, western-grip windshield wipers." } ] },
+    { key: "swing_speed", title: "How fast is your swing?", help: "Racket-head speed through contact. Faster swings want more mass and control.", type: "single", options: [
+      { value: "slow", label: "Slow", desc: "Smooth, relaxed pace." },
+      { value: "medium", label: "Medium", desc: "A typical, controlled pace." },
+      { value: "fast", label: "Fast", desc: "Explosive, high racket-head speed." } ] },
     { key: "power_source", title: "Where should the power come from?", help: "Do you want the racket to add pop, or do you bring your own?", type: "single", options: [
       { value: "needs_power", label: "From the racket", desc: "I want free depth and pop." },
       { value: "balanced", label: "A balance", desc: "A bit of help, but I can hit." },
@@ -26,10 +33,22 @@
       { value: "low", label: "Low", desc: "I hit fairly flat and direct." },
       { value: "medium", label: "Medium", desc: "Normal amount of spin." },
       { value: "high", label: "High", desc: "I live and die by heavy spin." } ] },
+    { key: "control_priority", title: "How much do you value control?", help: "Pinpoint placement and a predictable response vs. easy free power.", type: "single", options: [
+      { value: "low", label: "Low", desc: "I want easy power and a big sweet spot." },
+      { value: "medium", label: "Medium", desc: "A balance of power and precision." },
+      { value: "high", label: "High", desc: "Placement and feel matter most." } ] },
     { key: "maneuverability_priority", title: "How much do you value maneuverability?", help: "Fast hands at the net and quick reactions vs. raw stability.", type: "single", options: [
       { value: "low", label: "Low", desc: "I want stability and plow-through." },
       { value: "medium", label: "Medium", desc: "A reasonable middle ground." },
       { value: "high", label: "High", desc: "Whippy and quick is a must (e.g. doubles)." } ] },
+    { key: "weight_pref", title: "What racket weight do you prefer?", help: "Heavier is more stable and powerful; lighter is easier to swing.", type: "single", options: [
+      { value: "light", label: "Light", desc: "Easy to swing, very maneuverable (under ~300 g)." },
+      { value: "medium", label: "Medium", desc: "A balanced, versatile weight (~300-320 g)." },
+      { value: "heavy", label: "Heavy", desc: "Stable and powerful, more demanding (320 g+)." } ] },
+    { key: "head_pref", title: "What head size feels right?", help: "Smaller is more control and feel; larger is more power and forgiveness.", type: "single", options: [
+      { value: "small", label: "Smaller (control)", desc: "Midsize, 93-98 sq in. Precise and connected." },
+      { value: "mid", label: "Mid-plus (balanced)", desc: "98-100 sq in. The popular middle ground." },
+      { value: "large", label: "Oversize (forgiving)", desc: "100-110 sq in. Power and a big sweet spot." } ] },
     { key: "arm_sensitive", title: "Any arm, wrist, or elbow concerns?", help: "Tennis elbow or a history of arm trouble steers us to softer frames.", type: "boolean", options: [
       { value: true, label: "Yes, prioritize comfort", desc: "Softer, more flexible, arm-friendly frames." },
       { value: false, label: "No issues", desc: "Comfort is nice but not the priority." } ] },
@@ -50,6 +69,45 @@
   }
   const round1 = (x) => pyRound(x * 10) / 10;
 
+  // ---- Playstyle "desire" → which racket families to favor ------------
+  // Turns the survey into how much the player wants each trait, then we reward
+  // rackets whose category matches. This is what makes a power player land on a
+  // Pure Drive, a control player on a Blade/Prestige, a spin player on a Pure
+  // Aero/VCORE, a sensitive arm on a Clash/Boom, etc. (instead of one frame).
+  function styleDesire(p) {
+    const d = { power: 0, control: 0, spin: 0, comfort: 0, "all-court": 0 };
+    if (p.power_source === "needs_power") d.power += 2.2;
+    else if (p.power_source === "generates_own_power") d.control += 2.0;
+    if (p.spin_priority === "high") d.spin += 2.4;
+    else if (p.spin_priority === "low") d.control += 1.0;
+    if (p.control_priority === "high") d.control += 2.4;
+    else if (p.control_priority === "low") d.power += 1.6;
+    if (p.arm_sensitive) d.comfort += 2.6;
+    if (p.play_style === "aggressive_baseliner") { d.power += 1.2; d.spin += 0.6; }
+    else if (p.play_style === "counterpuncher") d.control += 1.4;
+    else if (p.play_style === "all_court") d["all-court"] += 1.8;
+    else if (p.play_style === "serve_and_volley") { d.control += 1.0; d["all-court"] += 1.2; }
+    if (p.skill_level === "advanced") d.control += 1.0;
+    else if (p.skill_level === "beginner") { d.power += 1.0; d.comfort += 1.2; }
+    if (p.backhand === "one") d.control += 1.0;
+    if (p.weight_pref === "heavy") d.control += 0.6;
+    else if (p.weight_pref === "light") { d.power += 0.6; d["all-court"] += 0.4; }
+    if (p.head_pref === "large") d.power += 1.0;
+    else if (p.head_pref === "small") d.control += 1.0;
+    return d;
+  }
+
+  function categoryBonus(racket, desire) {
+    const cat = String(racket.category || "").toLowerCase();
+    let total = 0, hit = 0;
+    for (const k in desire) {
+      total += desire[k];
+      if (desire[k] > 0 && cat.indexOf(k) !== -1) hit += desire[k];
+    }
+    return total > 0 ? hit / total : 0; // 0..1
+  }
+  const CAT_WEIGHT = 3.2;
+
   // ---- Ideal spec from survey -----------------------------------------
   function buildIdealSpec(p) {
     const notes = [];
@@ -57,33 +115,45 @@
     let head = 98
       + pick({ beginner: 8, intermediate: 3, advanced: -1 }, p.skill_level)
       + pick({ needs_power: 4, balanced: 0, generates_own_power: -3 }, p.power_source)
+      + pick({ small: -5, mid: 0, large: 6 }, p.head_pref || "mid")
       + (p.spin_priority === "high" ? 1 : 0)
+      + (p.control_priority === "high" ? -2 : 0)
+      + (p.backhand === "one" ? -1 : 0)
       + (p.arm_sensitive ? 2 : 0);
-    head = clamp(head, 95, 110);
+    head = clamp(head, 93, 110);
 
     let weight = 312
       + pick({ beginner: -22, intermediate: -4, advanced: 8 }, p.skill_level)
-      + pick({ needs_power: -8, balanced: 0, generates_own_power: 8 }, p.power_source)
+      + pick({ needs_power: -6, balanced: 0, generates_own_power: 8 }, p.power_source)
       + pick({ compact: -12, moderate: 0, full: 8 }, p.swing_length)
+      + pick({ slow: -10, medium: 0, fast: 10 }, p.swing_speed || "medium")
+      + pick({ light: -20, medium: 0, heavy: 18 }, p.weight_pref || "medium")
+      + (p.backhand === "one" ? 4 : 0)
       + (p.maneuverability_priority === "high" ? -10 : p.maneuverability_priority === "low" ? 4 : 0);
-    weight = clamp(weight, 270, 340);
+    weight = clamp(weight, 270, 345);
 
     let balance = 5
       + pick({ beginner: -4, intermediate: 0, advanced: 2 }, p.skill_level)
       + pick({ needs_power: -3, balanced: 0, generates_own_power: 2 }, p.power_source)
+      + pick({ light: -2, medium: 0, heavy: 2 }, p.weight_pref || "medium")
+      + (p.backhand === "one" ? 1 : 0)
       + (p.maneuverability_priority === "high" ? 2 : p.maneuverability_priority === "low" ? -1 : 0);
-    balance = clamp(balance, -2, 10);
+    balance = clamp(balance, -2, 11);
 
     let swing = 318
       + pick({ beginner: -16, intermediate: -2, advanced: 8 }, p.skill_level)
       + pick({ compact: -12, moderate: 0, full: 8 }, p.swing_length)
+      + pick({ slow: -8, medium: 0, fast: 9 }, p.swing_speed || "medium")
+      + pick({ light: -10, medium: 0, heavy: 10 }, p.weight_pref || "medium")
       + pick({ needs_power: -2, balanced: 0, generates_own_power: 4 }, p.power_source)
       + (p.maneuverability_priority === "high" ? -10 : p.maneuverability_priority === "low" ? 4 : 0);
-    swing = clamp(swing, 290, 340);
+    swing = clamp(swing, 288, 342);
 
     let stiffness = 65
       + pick({ needs_power: 3, balanced: 0, generates_own_power: -2 }, p.power_source)
-      + pick({ beginner: 1, intermediate: 0, advanced: -2 }, p.skill_level);
+      + pick({ beginner: 1, intermediate: 0, advanced: -2 }, p.skill_level)
+      + (p.control_priority === "high" ? -3 : p.control_priority === "low" ? 2 : 0)
+      + (p.backhand === "one" ? -1 : 0);
     let stiffnessWeight = 1.0;
     if (p.arm_sensitive) {
       stiffness -= 8;
@@ -97,8 +167,9 @@
     if (p.spin_priority === "high") {
       preferOpen = true; patternWeight = 1.0;
       notes.push("Leaning toward an open string pattern for extra spin and bite.");
-    } else if (p.spin_priority === "low" && ["all_court", "serve_and_volley", "counterpuncher"].includes(p.play_style)) {
-      preferOpen = false; patternWeight = 0.8;
+    } else if ((p.control_priority === "high" || p.spin_priority === "low") &&
+               ["all_court", "serve_and_volley", "counterpuncher"].includes(p.play_style)) {
+      preferOpen = false; patternWeight = 0.85;
       notes.push("Leaning toward a denser string pattern for control and a predictable response.");
     }
 
@@ -110,13 +181,13 @@
       ({ ideal, lo: ideal - half, hi: ideal + half, tolerance: tol, weight, label, unit });
 
     const targets = {
-      head_size_sqin: T(head, 2, 4, 1.4, "Head size", " sq in"),
-      strung_weight_g: T(weight, 8, 14, 1.6, "Weight", " g"),
+      head_size_sqin: T(head, 2, 3.5, 1.4, "Head size", " sq in"),
+      strung_weight_g: T(weight, 7, 12, 1.6, "Weight", " g"),
       balance_pts_hl: T(balance, 1.5, 3, 0.9, "Balance", " pts HL"),
-      swingweight: T(swing, 8, 14, 1.3, "Swingweight", ""),
+      swingweight: T(swing, 7, 12, 1.3, "Swingweight", ""),
       stiffness_ra: T(stiffness, 2, 4, stiffnessWeight, "Stiffness", " RA"),
     };
-    return { targets, prefer_open_pattern: preferOpen, pattern_weight: patternWeight, notes };
+    return { targets, prefer_open_pattern: preferOpen, pattern_weight: patternWeight, notes, desire: styleDesire(p) };
   }
 
   function scoreTarget(t, value) {
@@ -176,6 +247,11 @@
       const ps = isOpenPattern(racket.string_pattern) === ideal.prefer_open_pattern ? 1.0 : 0.25;
       weighted += ps * ideal.pattern_weight; total += ideal.pattern_weight;
     }
+    // Playstyle/category affinity — the big lever for variety between profiles.
+    if (ideal.desire) {
+      weighted += categoryBonus(racket, ideal.desire) * CAT_WEIGHT;
+      total += CAT_WEIGHT;
+    }
     const score = total ? (weighted / total) * 100 : 0;
     const { reasons, cautions } = explainRacket(racket, ideal, specMatches);
     return { racket, name: `${racket.brand} ${racket.model}`, score: round1(score),
@@ -184,8 +260,13 @@
 
   function recommendRackets(profile, rackets, topN) {
     const ideal = buildIdealSpec(profile);
-    let pool = rackets;
-    if (profile.budget_usd != null) pool = pool.filter(r => r.msrp_usd == null || r.msrp_usd <= profile.budget_usd);
+    // Only recommend rackets you can actually buy right now (in stock at retail).
+    let pool = rackets.filter(r => r.in_stock);
+    if (pool.length < Math.max(topN, 5)) pool = rackets; // safety net if flags missing
+    if (profile.budget_usd != null) {
+      const budgeted = pool.filter(r => r.msrp_usd == null || r.msrp_usd <= profile.budget_usd);
+      if (budgeted.length) pool = budgeted;
+    }
     const scored = pool.map(r => scoreRacket(r, ideal));
     scored.sort((a, b) => b.score - a.score);
     return { ideal, recs: scored.slice(0, Math.max(topN, 0)) };
