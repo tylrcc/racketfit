@@ -158,19 +158,45 @@
         court.rotation.y += vY + 0.0032;
         vY += (0.0035 - vY) * 0.02;
       }
-      // ball rallies baseline to baseline, arcing OVER the net (peak height at
-      // the net line x=0, touching down near each baseline) — like two players.
-      const A = 2.7;                              // baseline reach along the court
-      const x = Math.sin(T * 0.7) * A;
-      const z = Math.cos(T * 0.7) * 0.7;
-      const nx = x / A;                           // -1 baseline .. 0 net .. 1 baseline
-      const hgt = 1.18 * (1 - nx * nx);           // parabolic arc: high at the net, ~0 at baselines
-      ball.position.set(x, 0.14 + hgt, z);
-      ball.rotation.x += 0.09; ball.rotation.z += 0.05;
+      // --- realistic rally: one shot at a time ---------------------------
+      // Each shot: contact at a baseline -> arc over the net -> a real bounce
+      // on the far side -> pops up to the opposite baseline to be struck back.
+      // Direction and cross-court corner alternate every shot.
+      const A = 2.85;          // baseline reach along the court length
+      const Z = 1.05;          // cross-court reach (toward the sidelines)
+      const SHOT = 1.5;        // seconds per shot
+      const RAD = 0.14;        // ball radius (rests on court when h = 0)
+      const CONTACT = 0.5;     // racket-contact height at the baseline
+      const BOUNCE_U = 0.66;   // where in the shot the ball lands
+
+      const phase = T / SHOT;
+      const shot = Math.floor(phase);
+      const u = phase - shot;                 // 0..1 within this shot
+      const dir = (shot % 2 === 0) ? 1 : -1;  // alternate ends each shot
+
+      const x = dir * A * (2 * u - 1);        // baseline -> baseline
+      const z = Math.cos(phase * Math.PI) * Z; // cross-court, crosses net near center
+      const arc = (a, b, peak, tt) => a + (b - a) * tt + peak * 4 * tt * (1 - tt);
+      let h, landing;
+      if (u < BOUNCE_U) {                     // struck -> over the net -> down to bounce
+        h = arc(CONTACT, 0, 1.0, u / BOUNCE_U);
+        landing = false;
+      } else {                                // bounce -> up to the next contact
+        h = arc(0, CONTACT, 0.42, (u - BOUNCE_U) / (1 - BOUNCE_U));
+        landing = (u - BOUNCE_U) < 0.06;      // brief squash right after the bounce
+      }
+      ball.position.set(x, RAD + h, z);
+      // spin in the direction of travel + a little squash on the bounce
+      ball.rotation.z -= dir * 0.16;
+      ball.rotation.x += 0.04;
+      const squash = landing ? 0.78 : 1;
+      ball.scale.set(1, squash, 1);
+
+      // shadow tracks the ball and shrinks/fades as it rises
       shadow.position.set(x, 0.011, z);
-      const sc = 1 - hgt * 0.45;
+      const sc = Math.max(0.45, 1 - h * 0.5);
       shadow.scale.set(sc, sc, sc);
-      shadow.material.opacity = 0.30 * sc;
+      shadow.material.opacity = 0.34 * sc;
       renderer.render(scene, camera);
     }
     requestAnimationFrame(animate);
